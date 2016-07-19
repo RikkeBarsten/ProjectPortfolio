@@ -1,0 +1,40 @@
+﻿@model ProjectPortfolio.Models.Funder
+
+@{
+    ViewBag.Title = "Slet";
+}
+
+<h2>Slet</h2>
+<p class="error">@ViewBag.ErrorMessage</p>
+<h3>Er du sikker på, at du vil slette denne fra databasen?</h3>
+<div>
+    <h4>Funder</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Slet" class="btn btn-default" /> |
+            @Html.ActionLink("Tilbage til oversigten", "Index")
+        </div>
+    }
+</div>

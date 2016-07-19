@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ProjectPortfolio.Models.AProject">
+    <Position X="3.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIACAQAAAAAgAAQEAAAAAAQgAAAAAAAIAAAAAEAAAAA=</HashCode>
+      <FileName>Models\AProject.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Person" />
+      <Property Name="Program" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ProjectPortfolio.Models.Brief">
+    <Position X="3" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Brief.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SteeringCommittee" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ProjectPortfolio.Models.Person" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAACAAAAQkAAAAAAQAAAAAAAAAAAAAAAAAAQg=</HashCode>
+      <FileName>Models\Person.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ProjectPortfolio.Models.Project">
+    <Position X="4.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAABAAAAAAAIAEAAAAAAAAAAgAA=</HashCode>
+      <FileName>Models\Project.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Status" />
+      <Property Name="Funder" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ProjectPortfolio.Models.Funder">
+    <Position X="7.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAQAAAAIAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Models\Funder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectPortfolio.Models.Program">
+    <Position X="1.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAIAAEAAAQAAAA=</HashCode>
+      <FileName>Models\Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="ProjectPortfolio.Models.SteeringCommittee" Collapsed="true">
+    <Position X="1.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABEAAAEAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Brief.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ProjectPortfolio.Models.Status">
+    <Position X="7.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAEBAAAAAAAAAAAACAAAAABAAAA=</HashCode>
+      <FileName>Models\Project.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ProjectPortfolio.Models.ViewModels.DashboardClassesCollection" Collapsed="true">
+    <Position X="2" Y="4" Width="2.25" />
+    <AssociationLine Name="ProgramList" Type="ProjectPortfolio.Models.ViewModels.ProgramProjects" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.25" Y="4.445" />
+        <Point X="4.625" Y="4.445" />
+        <Point X="4.625" Y="5.398" />
+        <Point X="5.5" Y="5.398" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Models\ViewModels\DashboardClassesCollection.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="BudgetList" />
+      <Property Name="ProgramList" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ProjectPortfolio.Models.ViewModels.ProgramProjects">
+    <Position X="5.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ViewModels\ProgramProjects.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectPortfolio.Models.ViewModels.ProjectsBudget">
+    <Position X="5.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Models\ViewModels\ProjectsBudget.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
