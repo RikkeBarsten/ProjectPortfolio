@@ -50,12 +50,14 @@
 
 @if ( Model.Projects != null && Model.Projects.Count() > 0)
 {
-    <h4>Projekter finanseriet af @Model.Funders.Where(f => f.FunderId == ViewBag.FunderId).Single().Name</h4>
+    <h4>Projekter  - @Model.Funders.Where(f => f.FunderId == ViewBag.FunderId).Single().Name</h4>
      <table class="table table-condensed">
          <tr>
              <th>Projekt</th>
              <th>Startdato</th>
              <th>Kontaktperson</th>
+             <th>Status</th>
+
              
          </tr>
          @foreach (var item in Model.Projects)
@@ -64,6 +66,7 @@
                  <td>@item.Name</td>
                  <td>@item.StartDate.ToShortDateString()</td>
                  <td>@item.Person.Name</td>
+                 <td>@item.Status.ToString()</td>
                  
              </tr>
          }
