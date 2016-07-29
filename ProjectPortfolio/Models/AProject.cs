@@ -36,6 +36,7 @@ namespace ProjectPortfolio.Models
         public int? PersonId { get; set; }
 
         [ForeignKey("Program")]
+        [Required]
         public string ProgramId { get; set; }
 
 
