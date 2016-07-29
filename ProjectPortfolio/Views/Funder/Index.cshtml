@@ -7,7 +7,7 @@
 <h2>Fonde</h2>
 
 <p>
-    @Html.ActionLink("Ny fond", "Create")
+    @Html.ActionLink("Registrer ny fond", "Create")
 </p>
 <table class="table">
     <tr>
@@ -63,7 +63,7 @@
          @foreach (var item in Model.Projects)
          {
              <tr>
-                 <td>@item.Name</td>
+                 <td>@Html.ActionLink(item.Name, "Details", "Project", new { id = item.Id }, null)</td>
                  <td>@item.StartDate.ToShortDateString()</td>
                  <td>@item.Person.Name</td>
                  <td>@item.Status.ToString()</td>
