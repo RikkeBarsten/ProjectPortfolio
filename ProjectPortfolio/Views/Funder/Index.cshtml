@@ -63,7 +63,7 @@
          @foreach (var item in Model.Projects)
          {
              <tr>
-                 <td>@Html.ActionLink(item.Name, "Details", "Project", new { id = item.Id }, null)</td>
+                 <td>@Html.ActionLink(item.Name, "Details", "Project", new { id = item.ProjectId }, null)</td>
                  <td>@item.StartDate.ToShortDateString()</td>
                  <td>@item.Person.Name</td>
                  <td>@item.Status.ToString()</td>
