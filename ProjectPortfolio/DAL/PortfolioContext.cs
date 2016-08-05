@@ -20,9 +20,15 @@ namespace ProjectPortfolio.DAL
         {
         }
 
-        public System.Data.Entity.DbSet<ProjectPortfolio.Models.Project> AProjects { get; set; }
+        public DbSet<Project> AProjects { get; set; }
         public DbSet<Funder> Funders { get; set; }
         public DbSet<Person> People { get; set; }
         public DbSet<Program> Programs { get; set; }
+        public DbSet<File> Files { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AProject>().HasMany(p => p.Files);
+        }
     }
 }

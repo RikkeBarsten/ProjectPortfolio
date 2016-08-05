@@ -8,6 +8,8 @@ using ProjectPortfolio.DAL;
 using Bibliotek.SortSearch;
 using System.Data;
 using System.Data.Entity.Infrastructure;
+using System.Web;
+using System.Collections.Generic;
 
 namespace ProjectPortfolio.Controllers
 {
@@ -16,17 +18,56 @@ namespace ProjectPortfolio.Controllers
         private PortfolioContext db = new PortfolioContext();
 
         // GET: Project
-        public ActionResult Index(string test)
+        public ActionResult Index(string sortOrder)
         {
-            var projects = db.AProjects.Include(p => p.Funder).ToList();
+            // When no sortOrder is selected (IsNullOrEmpty is true) 
+            // the sort should be by name ascending - the first time true the last case
+            // in the switch falls through to default. The NameSortParm is set to "name_desc"
+            // so that the project name will be sorted in descending order if toggled
 
-            if (test == "Sorter")
+            ViewBag.DateStartSortParm = string.IsNullOrEmpty(sortOrder) ? "dateStart_desc" : "";
+            ViewBag.DateEndSortParm = sortOrder == "dateEnd" ? "dateEnd_desc" : "dateEnd";
+            ViewBag.NameSortParm =  sortOrder == "name" ? "name_desc" : "name";
+            
+
+            var projects = from p in db.AProjects
+                           select p;
+
+            switch (sortOrder)
             {
-                projects = Sort.MergeSort(projects);
+                case "dateStart_desc":
+                    projects = projects.OrderByDescending(p => p.StartDate);
+                    break;
+
+                case "DateEnd":
+                    projects = projects.OrderBy(p => p.EndDate);
+                    break;
+
+                case "DateEnd_desc":
+                    projects = projects.OrderByDescending(p => p.EndDate);
+                    break;
+
+                case "name":
+                    projects = projects.OrderBy(p => p.Name);
+                    break;
+
+                case "name_desc":
+                    projects = projects.OrderByDescending(p => p.Name);
+                    break;
+
+                default:
+                    projects = projects.OrderBy(p => p.StartDate);
+                    break;
             }
 
-            return View(projects);
+            // projects.Include(p => p.Funder);
+
+            
+
+            return View(projects.ToList());
         }
+
+       
 
         // GET: Project/Details/5
         public ActionResult Details(Guid? id)
@@ -36,9 +77,9 @@ namespace ProjectPortfolio.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var projects = db.AProjects.Include(p => p.Funder).Include(p => p.Program).Include(p => p.Person).ToList();
+            var projects = db.AProjects.Include(p => p.Funder).Include(p => p.Program).Include(p => p.Person).Include(p => p.Files).ToList();
 
-            Project project = projects.SingleOrDefault(p => p.Id == id);
+            Project project = projects.SingleOrDefault(p => p.ProjectId == id);
 
             if (project == null)
             {
@@ -61,14 +102,30 @@ namespace ProjectPortfolio.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name,StartDate,EndDate,Description,Budget,PersonId,FunderId,ProgramId")] Project project)
+        public ActionResult Create([Bind(Include = "Name,StartDate,EndDate,Description,Budget,PersonId,FunderId,ProgramId")] Project project, HttpPostedFileBase upload)
         {
 
             try
             {
             if (ModelState.IsValid)
             {
-                //project.Id = Guid.NewGuid();
+                    if (upload != null && upload.ContentLength > 0)
+                    {
+                        var application = new File
+                        {
+                            FileName = System.IO.Path.GetFileName(upload.FileName),
+                            FileType = FileType.application,
+                            ContentType = upload.ContentType,
+                        };
+
+                        using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                        {
+                            application.Content = reader.ReadBytes(upload.ContentLength);
+                        }
+                        project.Files = new List<File> { application };
+                    }
+                    
+                //project.Id = Guid.NewGuid();  -- not necessary as set in model annotations: [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
                 db.AProjects.Add(project);
                 db.SaveChanges();
                 return RedirectToAction("Index");

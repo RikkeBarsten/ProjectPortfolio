@@ -137,6 +137,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\FunderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndicatorController.cs" />
@@ -146,6 +147,8 @@
     </Compile>
     <Compile Include="Models\AProject.cs" />
     <Compile Include="Models\Brief.cs" />
+    <Compile Include="Models\File.cs" />
+    <Compile Include="Models\FileType.cs" />
     <Compile Include="Models\Funder.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="DAL\PortfolioContext.cs" />
@@ -210,6 +213,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\File\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -54,10 +54,24 @@
         <dt>
             @Html.DisplayNameFor(model => model.Funder.Name)
         </dt>
-
+             
         <dd>
             @Html.DisplayFor(model => model.Funder.Name)
         </dd>
+        
+        @* Vedhæftning *@
+        @if (Model.Files.Any(f => f.FileType == FileType.application))
+        {
+            <dt>
+                Ansøgning
+            </dt>
+            <dd>
+                @Html.ActionLink(@Model.Files.First(f => f.FileType == FileType.application).FileName, "Index", "File", new {id = @Model.Files.First(f => f.FileType == FileType.application).FileId }, null)
+            </dd>
+        }
+
+        @* Vedhæftning slut *@
+
         <dt>
             @Html.DisplayNameFor(model => model.Person)
         </dt>
@@ -84,6 +98,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Rediger", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Rediger", "Edit", new { id = Model.ProjectId }) |
     @Html.ActionLink("Tilbage til oversigt", "Index")
 </p>

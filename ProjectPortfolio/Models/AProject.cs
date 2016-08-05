@@ -13,7 +13,7 @@ namespace ProjectPortfolio.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public Guid ProjectId { get; set; }
 
         [Display(Name = "Navn")]
         [Required]
@@ -43,6 +43,8 @@ namespace ProjectPortfolio.Models
         //Navigation properties
         public virtual Person Person { get; set; }
         public virtual Program Program { get; set; }
+
+        public virtual List<File> Files { get; set; }
 
 
         // Implement IComparable, to be able to use my sorting algorithms
