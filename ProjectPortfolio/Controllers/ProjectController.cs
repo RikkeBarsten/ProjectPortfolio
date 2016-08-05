@@ -150,6 +150,7 @@ namespace ProjectPortfolio.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Project project = db.AProjects.Find(id);
+             
             if (project == null)
             {
                 return HttpNotFound();
@@ -165,7 +166,7 @@ namespace ProjectPortfolio.Controllers
         
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPost(Guid? id)
+        public ActionResult EditPost(Guid? id, HttpPostedFileBase upload)
         {
             if (id == null)
             {
@@ -178,12 +179,34 @@ namespace ProjectPortfolio.Controllers
             // Using TryUpdateModel instead of binding to prevent overposting.(the Bind attribute clears out 
             //any pre-existing data in fields not listed in the Include parameter) Properties added will be updated if there is no input, it will
             // be set to null. 
-            // Projectnumber not added (will only be added by Controller Department
+            
+            // Projectnumber not added (will only be added by Controller Department)
             if (TryUpdateModel(projectToUpdate, "",
-                new string[] { "Name", "Status","StartDate", "EndDate", "Description", "Budget", "PersonId", "FunderId", "ProgramId" }))
+                new string[] { "Name", "Status","StartDate", "EndDate", "Description",
+                    "Budget", "PersonId", "FunderId", "ProgramId" }))
             {
                 try
                 {
+                    if (upload != null && upload.ContentLength > 0)
+                    {
+                        if (projectToUpdate.Files.Any(p => p.FileType == FileType.application))
+                        {
+                            db.Files.Remove(projectToUpdate.Files.First(f => f.FileType == FileType.application));
+                        }
+                        var application = new File
+                        {
+                            FileName = upload.FileName,
+                            FileType = FileType.application,
+                            ContentType = upload.ContentType
+                        };
+                        using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                        {
+                            application.Content = reader.ReadBytes(upload.ContentLength);
+                        }
+                        projectToUpdate.Files = new List<Models.File> { application };
+                    }
+
+
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
