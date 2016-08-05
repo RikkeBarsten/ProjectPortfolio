@@ -9,7 +9,7 @@ using System.Web;
 
 namespace ProjectPortfolio.Models
 {
-    public abstract class AProject : IComparable<AProject>
+    public abstract class AProject
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -47,11 +47,7 @@ namespace ProjectPortfolio.Models
         public virtual List<File> Files { get; set; }
 
 
-        // Implement IComparable, to be able to use my sorting algorithms
-        public int CompareTo(AProject other)
-        {
-            return this.StartDate.CompareTo(other.StartDate);
-        }
+       
     }
 
     
