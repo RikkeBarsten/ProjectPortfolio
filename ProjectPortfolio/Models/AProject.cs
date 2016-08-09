@@ -29,9 +29,12 @@ namespace ProjectPortfolio.Models
         [Display(Name = "Projektslut")]
         public DateTime EndDate { get; set; }
 
-        [Display(Name = "Beskrivelse")]
+        [Display(Name = "Kort resume")]
         public string Description { get; set; }
-        
+
+        [Display(Name = "Bemærkning")]
+        public string Remark { get; set; }
+
         [ForeignKey("Person")]
         public int? PersonId { get; set; }
 

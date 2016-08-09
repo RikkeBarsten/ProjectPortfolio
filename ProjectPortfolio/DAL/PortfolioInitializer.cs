@@ -91,7 +91,15 @@ namespace ProjectPortfolio.DAL
             };
 
             projects.ForEach(p => context.AProjects.Add(p));
-            context.SaveChanges();
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (Exception exception)
+            {
+               
+            }
+            
         }
     }
 }

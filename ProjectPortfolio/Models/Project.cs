@@ -19,7 +19,16 @@ namespace ProjectPortfolio.Models
         [DisplayFormat(DataFormatString = "{0:C0}")]
         [Range(0.1, 10000000)]
         [DataType(DataType.Currency)]
-        public decimal Budget { get; set; }
+        public decimal? Budget { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:C0}")]
+        [Display(Name = "Egenfinansiering")]
+        [Range(0.1, 10000000)]
+        [DataType(DataType.Currency)]
+        public decimal? SelfFinancing { get; set; }
+
+        [Display(Name = "Ejer/partner")]
+        public Owner? Owner { get; set; }
 
         [DisplayFormat(NullDisplayText = "Ikke tildelt")]
         [Display(Name = "Projektnummer")]
@@ -43,5 +52,11 @@ namespace ProjectPortfolio.Models
         Bevilget,
         Afslag,
         Afbrudt
+    }
+
+    public enum Owner
+    {
+        Ejer,
+        Partner
     }
 }
