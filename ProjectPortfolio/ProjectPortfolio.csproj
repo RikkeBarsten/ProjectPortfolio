@@ -147,6 +147,7 @@
     </Compile>
     <Compile Include="Models\AProject.cs" />
     <Compile Include="Models\Brief.cs" />
+    <Compile Include="Models\Deadlines.cs" />
     <Compile Include="Models\File.cs" />
     <Compile Include="Models\FileType.cs" />
     <Compile Include="Models\Funder.cs" />
@@ -199,7 +200,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Project\Create.cshtml" />
     <Content Include="Views\Project\Delete.cshtml" />
     <Content Include="Views\Project\Details.cshtml" />
     <Content Include="Views\Project\Edit.cshtml" />
@@ -210,6 +210,7 @@
     <Content Include="Views\Funder\Edit.cshtml" />
     <Content Include="Views\Funder\Index.cshtml" />
     <Content Include="Views\Indicator\Index.cshtml" />
+    <Content Include="Views\Project\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

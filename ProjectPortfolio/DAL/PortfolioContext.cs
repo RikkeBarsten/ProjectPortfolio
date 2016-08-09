@@ -25,6 +25,7 @@ namespace ProjectPortfolio.DAL
         public DbSet<Person> People { get; set; }
         public DbSet<Program> Programs { get; set; }
         public DbSet<File> Files { get; set; }
+        public DbSet<Deadline> Deadlines { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
