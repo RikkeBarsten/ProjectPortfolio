@@ -13,11 +13,17 @@ namespace ProjectPortfolio.Models
         [Display(Name = "Fond")]
         public string Name { get; set; }
 
-        [Display(Name = "Beskrivelse")]
+        [Display(Name = "Formål")]
         public string Description { get; set; }
+
+        [Display(Name = "Hjemmeside")]
+        public string Url { get; set; }
 
         // Navigation property
         public virtual List<Project> Projects { get; set; }
+
+        // Navigation property
+        public virtual List<Deadline> Deadlines { get; set; }
     }
 
     

@@ -14,14 +14,19 @@ namespace ProjectPortfolio.DAL
             var funders = new List<Funder>
             {
                 new Funder { Name= "AUB",
+                    Url = "https://indberet.virk.dk/myndigheder/stat/AUB/Ansoegning_om_tilskud_fra_AER_til_faglige_udvalg_og_lokale_uddannelsesudvalg",
                     Description ="Arbejdsgivernes Uddannelses Bidrag støtter primært praktikpladsopsøgende arbejde." },
                 new Funder { Name = "Erasmus+",
+                    Url = "http://ufm.dk/uddannelse-og-institutioner/tilskud-til-udveksling-og-internationale-projekter/programoversigt/erasmusplus",
                     Description = "EU Fond, der støtter mobilitetsprojekter på EUD-området."},
                 new Funder { Name = "TrygFonden",
+                    Url = "https://www.trygfonden.dk/soeg-stoette",
                     Description="Privat fond, der støtter et bredt udvalg af projekter. Ansøgninsfrist for regionale projekter 1. marts og 1. september."},
                 new Funder {Name = "Kompetencefonden",
+                    Url = "http://www.kompetenceudvikling.dk/kompetencefonden",
                     Description="Støtter kompetenceudviklingsprojekter"},
                 new Funder {Name="Knud Højgaard Fond",
+                    Url = "http://www.khf.dk/",
                     Description="Knud Højgaards Fond er en almennyttig erhvervsdrivende fond, der bl.a. støtter initiativrige studerende til at realisere drømmen om at dygtiggøre sig ved studier i udlandet."}
             };
             funders.ForEach(f => context.Funders.Add(f));
