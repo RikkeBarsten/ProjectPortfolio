@@ -1,4 +1,4 @@
-﻿
+﻿@model IDictionary<string, System.Text.StringBuilder>
 
 @{
     ViewBag.Title = "Hjem";
@@ -15,17 +15,40 @@
 
 <div class="row">
     <div class="col-md-6">
-        <h2>Overskrift 1</h2>
+        <h4>Sådan kommer du i gang med projekter</h4>
         
-        <p>
-            Indhold
-        </p>
+        <ul>
+            <li>Kig igennem listen af projekter for inspiration</li>
+            <li>Du kan sortere projekter efter status - og se hvilke projekter som er godkendt, og hvilke der er afslået</li>
+            <li>Læs gerne projekternes ansøgninger igennem for inspiration til, hvordan du skriver din egen ansøgning.</li>
+            <li>I oversigten herunder kan du se kommende ansøgningsfrister.</li>
+        </ul>
+        <h5>God arbejdslyst!</h5>
         
     </div>
     
     <div class="col-md-6">
-        <h2>Overskrift 2</h2>
-        <p>Indhold</p>
+        <h4>Hvem kan godkende projektansøgninger?</h4>
+        <p>
+            Hvis projektets samalede budget er på 100.000 eller over, skal projektet godkendes af TECs projektstyregruppe.
+            Projekter med budget under 100.000 skal godkendes af chefen.
+        </p>
+        <br />
+
+        <h4>Hvilke projekter skal registreres på TEC Projekter?</h4>
+        <ul>
+            <li>projekter med ekstern finansiering.</li>
+            <li>projekter inden for alle områder i TEC (EUD, AMU, HTX mv.)</li>
+            <li>projekter, hvor TEC er ansøger (”ejer” projektet) eller hvor TEC deltager som samarbejdspartner. </li>
+            <li>nationale og internationale projekter</li>
+        </ul>
+        <br />
+        <h4>Projektnummer</h4>
+        <p>
+            Når et projekt bevilliges kontaktes Controller kontoret og herefter tildeles det et projektnummer.
+            Budget og Aktivitietsstyring opdaterer projektnummeret på projekthjemmesiden og giver projektlederen besked.
+            Alle udgifter (jf. projekt budget) konteres til dette nummer.
+        </p>
         
     </div>
 </div>
