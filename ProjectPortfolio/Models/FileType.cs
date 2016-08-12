@@ -8,7 +8,7 @@ namespace ProjectPortfolio.Models
     public enum FileType
     {
         application = 1,
-        misc,
+        response,
         photo
     } 
 }

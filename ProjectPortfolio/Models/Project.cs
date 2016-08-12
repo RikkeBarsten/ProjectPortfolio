@@ -37,6 +37,10 @@ namespace ProjectPortfolio.Models
         [Required]
         public Status Status { get; set; }
 
+        public string ExtProjectNumber { get; set; }
+
+        public int MyProperty { get; set; }
+
         [ForeignKey("Funder")]
         public int? FunderId { get; set; }
 

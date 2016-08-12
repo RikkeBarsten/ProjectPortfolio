@@ -38,6 +38,9 @@ namespace ProjectPortfolio.Models
         [ForeignKey("Person")]
         public int? PersonId { get; set; }
 
+        [Display(Name = "Ansvarlig leder/chef")]
+        public string Responsible { get; set; }
+
         [ForeignKey("Program")]
         [Required]
         public string ProgramId { get; set; }

@@ -95,9 +95,9 @@ namespace ProjectPortfolio.DAL
             {
                 context.SaveChanges();
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-               
+                // add action
             }
             
         }

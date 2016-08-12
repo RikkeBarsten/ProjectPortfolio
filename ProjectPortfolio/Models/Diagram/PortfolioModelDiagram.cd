@@ -3,14 +3,13 @@
   <Class Name="ProjectPortfolio.Models.AProject">
     <Position X="3.75" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIACAQAAAAAgAAQEAAAAAAQgAAAAAAAIAAAAAEAAAAA=</HashCode>
+      <HashCode>gIAAAQAAAAAgAAAEAAAAAAQgBAAAAAAIAAAAAEAAAYA=</HashCode>
       <FileName>Models\AProject.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Person" />
       <Property Name="Program" />
     </ShowAsAssociation>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="ProjectPortfolio.Models.Brief">
     <Position X="3" Y="4.5" Width="1.5" />
@@ -31,9 +30,9 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="ProjectPortfolio.Models.Project">
-    <Position X="4.75" Y="4.5" Width="1.5" />
+    <Position X="4.75" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAEAAAAAAAAAAABAAAAAAAIAEAAAAAAAAAAgAA=</HashCode>
+      <HashCode>AIAAAACEAAABACAAAAABAAAAAAAIAEAAAAAAAAAAgAA=</HashCode>
       <FileName>Models\Project.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -44,7 +43,7 @@
   <Class Name="ProjectPortfolio.Models.Funder">
     <Position X="7.25" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAgAAAAAAAAAAQAAAAIAAAAAAAAAAAAAQA=</HashCode>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAQAAAAIAAAACAEAAAAAAQA=</HashCode>
       <FileName>Models\Funder.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -55,6 +54,16 @@
       <FileName>Models\Program.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="ProjectPortfolio.Models.File">
+    <Position X="5.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAgAAAAAAAAAAAAIABAAAAAAAAAAQAAJAAAA=</HashCode>
+      <FileName>Models\File.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="AProject" />
+    </ShowAsAssociation>
+  </Class>
   <Enum Name="ProjectPortfolio.Models.SteeringCommittee" Collapsed="true">
     <Position X="1.5" Y="6" Width="1.5" />
     <TypeIdentifier>
@@ -63,7 +72,7 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="ProjectPortfolio.Models.Status">
-    <Position X="7.25" Y="6" Width="1.5" />
+    <Position X="7.25" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgAAAAEBAAAAAAAAAAAACAAAAABAAAA=</HashCode>
       <FileName>Models\Project.cs</FileName>

@@ -102,25 +102,25 @@ namespace ProjectPortfolio.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name,StartDate,EndDate,Description,Budget,PersonId,FunderId,ProgramId")] Project project, HttpPostedFileBase upload)
+        public ActionResult Create([Bind(Include = "Name,StartDate,EndDate,Description,Budget,PersonId,FunderId,ProgramId")] Project project, HttpPostedFileBase uploadApp)
         {
 
             try
             {
             if (ModelState.IsValid)
             {
-                    if (upload != null && upload.ContentLength > 0)
+                    if (uploadApp != null && uploadApp.ContentLength > 0)
                     {
                         var application = new File
                         {
-                            FileName = System.IO.Path.GetFileName(upload.FileName),
+                            FileName = System.IO.Path.GetFileName(uploadApp.FileName),
                             FileType = FileType.application,
-                            ContentType = upload.ContentType,
+                            ContentType = uploadApp.ContentType,
                         };
 
-                        using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                        using (var reader = new System.IO.BinaryReader(uploadApp.InputStream))
                         {
-                            application.Content = reader.ReadBytes(upload.ContentLength);
+                            application.Content = reader.ReadBytes(uploadApp.ContentLength);
                         }
                         project.Files = new List<File> { application };
                     }
@@ -159,6 +159,7 @@ namespace ProjectPortfolio.Controllers
             ViewBag.PersonId = new SelectList(db.People, "PersonId", "FirstName", project.PersonId);
             ViewBag.ProgramId = new SelectList(db.Programs, "ProgramId", "ProgramName", project.ProgramId);
             ViewBag.FunderId = new SelectList(db.Funders, "FunderId", "Name", project.FunderId);
+
             return View(project);
         }
 
@@ -166,7 +167,7 @@ namespace ProjectPortfolio.Controllers
         
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPost(Guid? id, HttpPostedFileBase upload)
+        public ActionResult EditPost(Guid? id, HttpPostedFileBase uploadApp, HttpPostedFileBase uploadResponse)
         {
             if (id == null)
             {
@@ -187,7 +188,8 @@ namespace ProjectPortfolio.Controllers
             {
                 try
                 {
-                    if (upload != null && upload.ContentLength > 0)
+                    // Upload application
+                    if (uploadApp != null && uploadApp.ContentLength > 0)
                     {
                         if (projectToUpdate.Files.Any(p => p.FileType == FileType.application))
                         {
@@ -195,15 +197,35 @@ namespace ProjectPortfolio.Controllers
                         }
                         var application = new File
                         {
-                            FileName = upload.FileName,
+                            FileName = uploadApp.FileName,
                             FileType = FileType.application,
-                            ContentType = upload.ContentType
+                            ContentType = uploadApp.ContentType
                         };
-                        using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                        using (var reader = new System.IO.BinaryReader(uploadApp.InputStream))
                         {
-                            application.Content = reader.ReadBytes(upload.ContentLength);
+                            application.Content = reader.ReadBytes(uploadApp.ContentLength);
                         }
                         projectToUpdate.Files = new List<Models.File> { application };
+                    }
+
+                    // Upload response
+                    if (uploadResponse != null && uploadResponse.ContentLength > 0)
+                    {
+                        if (projectToUpdate.Files.Any(p => p.FileType == FileType.response))
+                        {
+                            db.Files.Remove(projectToUpdate.Files.First(f => f.FileType == FileType.response));
+                        }
+                        var response = new File
+                        {
+                            FileName = uploadResponse.FileName,
+                            FileType = FileType.response,
+                            ContentType = uploadResponse.ContentType
+                        };
+                        using (var reader = new System.IO.BinaryReader(uploadResponse.InputStream))
+                        {
+                            response.Content = reader.ReadBytes(uploadResponse.ContentLength);
+                        }
+                        projectToUpdate.Files = new List<Models.File> { response };
                     }
 
 
