@@ -23,7 +23,7 @@ namespace ProjectPortfolio.Controllers
 
             foreach (var group in groupB)
             {
-                decimal groupBudget = group.Sum(b => b.Budget);
+                decimal? groupBudget = group.Sum(b => b.Budget);
 
                 dataB.Add(new ProjectsBudget { Year = group.Key, NoProjects = group.Count(), Budget = groupBudget });
             }

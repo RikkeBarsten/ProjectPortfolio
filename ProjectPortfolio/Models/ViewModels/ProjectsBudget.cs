@@ -12,7 +12,7 @@ namespace ProjectPortfolio.Models.ViewModels
         public int NoProjects { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:C0}")]
-        public decimal Budget { get; set; }
+        public decimal? Budget { get; set; }
 
         public int CompareTo(ProjectsBudget other)
         {
