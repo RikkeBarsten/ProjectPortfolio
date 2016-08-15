@@ -20,7 +20,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.Status, htmlAttributes: new { @class = "form-control" })
+                @Html.EnumDropDownListFor(model => model.Status, 
+               htmlAttributes: new { @class = "form-control", id="status", onchange = "accepted(this)" })
                 @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -135,13 +136,13 @@
         </div>
 
                     @* End attachment *@
-
+    
 
         @* Start attachment - response *@
 
         @if (Model.Files.Any(f => f.FileType == FileType.response))
         {
-            <div class="form-group">
+            <div class="form-group" id="ba">
                 <span class="control-label col-md-2"><strong>Svar fra fond</strong></span>
                 <div class="col-md-10">
                     @Html.ActionLink(@Model.Files.First(f => f.FileType == FileType.response).FileName, "Index", "File",
@@ -150,7 +151,7 @@
             </div>
         }
 
-        <div class="form-group">
+        <div class="form-group" id="ba">
             @Html.Label("Tilføj/erstat svarbrev", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input type="file" id="Response" name="uploadResponse" />
@@ -160,12 +161,25 @@
         @* End attachment *@
 
           
-          <div class="form-group" title="Projektnummer oprettes af Budget- og aktivitetsstyring">
+          
+
+          
+          <div class="form-group skjul"  title="Projektnummer oprettes af Budget- og aktivitetsstyring" style = "display:none" >
               @Html.LabelFor(model => model.ProjectNumber, htmlAttributes: new { @class = "control-label col-md-2" })
               
               <div class="col-md-10">
                   @Html.EditorFor(model => model.ProjectNumber, new { htmlAttributes = new { @class = "form-control" } })
                   @Html.ValidationMessageFor(model => model.ProjectNumber, "", new { @class = "text-danger" })
+              </div>
+          </div>
+
+          
+          <div class="form-group skjul" style="display:none">
+              @Html.LabelFor(model => model.ExtProjectNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+
+              <div class="col-md-10">
+                  @Html.EditorFor(model => model.ExtProjectNumber, new { htmlAttributes = new { @class = "form-control" } })
+                  @Html.ValidationMessageFor(model => model.ExtProjectNumber, "", new { @class = "text-danger" })
               </div>
           </div>
 
@@ -190,6 +204,28 @@
 <div>
     @Html.ActionLink("Tilbage til listen", "Index")
 </div>
+
+<script>
+    if ("@Model.Status.ToString()" == "Bevilget") {
+        document.getElementsByClassName("skjul")[0].style.display = "block";
+        document.getElementsByClassName("skjul")[1].style.display = "block";
+    }
+
+
+    function accepted(option) {
+
+        console.log(option.value);
+
+        if (option.value == 2) {
+            alert("Husk at give Budgetafdelingen besked, hvis din projektansøgning er godkendt, " +
+                "så du kan få et projektnummer.");
+            document.getElementsByClassName("skjul")[0].style.display = "block";
+            document.getElementsByClassName("skjul")[1].style.display = "block";
+        }
+    }
+    
+
+</script>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
