@@ -32,18 +32,18 @@ namespace ProjectPortfolio.DAL
             funders.ForEach(f => context.Funders.Add(f));
             context.SaveChanges();
 
-            var people = new List<Person>
-            {
-                new Person {FirstName="Troels Royster", LastName="Olsen", Email="tro@tec.dk" },
-                new Person {FirstName="Rikke", LastName="Barsten", Email="rba@tec.dk" },
-                new Person {FirstName = "Glenn Møller", LastName="Jensen", Email="gmj@tec.dk" },
-                new Person {FirstName = "Vibeke Holtum", LastName="Nørgaard", Email="vhn@tec.dk" },
-                new Person {FirstName = "Karin Staal", LastName="Køhler", Email="ksk@tec.dk" },
-                new Person {FirstName = "Charlotte", LastName="Lundius", Email="cl@tec.dk" }
-            };
+            //var people = new List<Person>
+            //{
+            //    new Person {FirstName="Troels Royster", LastName="Olsen", Email="tro@tec.dk" },
+            //    new Person {FirstName="Rikke", LastName="Barsten", Email="rba@tec.dk" },
+            //    new Person {FirstName = "Glenn Møller", LastName="Jensen", Email="gmj@tec.dk" },
+            //    new Person {FirstName = "Vibeke Holtum", LastName="Nørgaard", Email="vhn@tec.dk" },
+            //    new Person {FirstName = "Karin Staal", LastName="Køhler", Email="ksk@tec.dk" },
+            //    new Person {FirstName = "Charlotte", LastName="Lundius", Email="cl@tec.dk" }
+            //};
 
-            people.ForEach(p => context.People.Add(p));
-            context.SaveChanges();
+            //people.ForEach(p => context.People.Add(p));
+            //context.SaveChanges();
 
             var programs = new List<Program>()
             {
@@ -60,32 +60,32 @@ namespace ProjectPortfolio.DAL
                 new Project { Name="Elbranchens fagfolk i dialog med virksomheder med praktikpladser - 2015",
                     StartDate=DateTime.Parse("06-01-2014"),
                     EndDate=DateTime.Parse("03-01-2015"),
-                    FunderId = 1, PersonId = 6, Budget =184344.00m, ProjectNumber = 3004, ProgramId = "B",
+                    FunderId = 1, Person = "Lars Larsen", Budget =184344.00m, ProjectNumber = 3004, ProgramId = "B",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam commodo lobortis nisl molestie malesuada. Quisque eleifend quis nisl at tristique. Maecenas suscipit nibh quis elit sagittis, sit amet fermentum enim tincidunt. Phasellus quis metus diam. Fusce id lacus odio. In sagittis in augue eget viverra. Integer tristique turpis et ex pellentesque commodo. Fusce quis venenatis massa. Ut placerat enim at tellus eleifend, non pharetra diam fringilla. Pellentesque eu orci facilisis, pretium magna vel, congue nunc. Curabitur purus arcu, posuere ac blandit sed, pellentesque ut velit. Morbi sed dictum libero. Integer efficitur dolor tortor. Duis dignissim tellus vehicula purus malesuada, eu laoreet quam varius. Pellentesque rhoncus sapien sit amet tellus placerat faucibus. ",
                     Files = new List<File> { }
                 },
                 new Project { Name="Nyt tekonologifag",
                     StartDate=DateTime.Parse("08-01-2015"),
                     EndDate=DateTime.Parse("05-01-2016"),
-                    FunderId = 5, PersonId = 1, Budget = 75000.00m, ProjectNumber = 3005, ProgramId = "B",
+                    FunderId = 5, Person = "Rikke Barsten", Budget = 75000.00m, ProjectNumber = 3005, ProgramId = "B",
                     Files = new List<File> { }
                     },
                 new Project { Name="Svage elever i stærke virksomheder",
                     StartDate=DateTime.Parse("06-01-2014"),
                     EndDate=DateTime.Parse("31-05-2015"),
-                    FunderId = 1, PersonId = 5, Budget = 67825.00m, ProjectNumber = 3006, ProgramId = "B",
+                    FunderId = 1, Person = "Troels Troelsen", Budget = 67825.00m, ProjectNumber = 3006, ProgramId = "B",
                     Files = new List<File> { }
                 },
                 new Project { Name="Kompetencefonden pulje 2015",
                     StartDate=DateTime.Parse("01-01-2015"),
                     EndDate=DateTime.Parse("09-01-2019"),
-                    FunderId = 4, PersonId = 2, Budget = 30000.00m, ProjectNumber = 3007, Status = Status.Bevilget, ProgramId = "A",
+                    FunderId = 4, Person = "Rikke Barsten", Budget = 30000.00m, ProjectNumber = 3007, Status = Status.Bevilget, ProgramId = "A",
                     Files = new List<File> { }
                 },
                 new Project { Name="Clean Tech",
                     StartDate=DateTime.Parse("01-09-2014"),
                     EndDate=DateTime.Parse("31-08-2017"),
-                    FunderId = 2, PersonId = 4, Budget = 284515.00m, ProjectNumber = 3008, Status = Status.Bevilget, ProgramId = "B",
+                    FunderId = 2, Person = "Nina Olsen", Budget = 284515.00m, ProjectNumber = 3008, Status = Status.Bevilget, ProgramId = "B",
                     Files = new List<File> { }
                 }
             };

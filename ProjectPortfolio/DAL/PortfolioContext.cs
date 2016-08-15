@@ -22,7 +22,7 @@ namespace ProjectPortfolio.DAL
 
         public DbSet<Project> AProjects { get; set; }
         public DbSet<Funder> Funders { get; set; }
-        public DbSet<Person> People { get; set; }
+        //public DbSet<Person> People { get; set; }
         public DbSet<Program> Programs { get; set; }
         public DbSet<File> Files { get; set; }
         public DbSet<Deadline> Deadlines { get; set; }

@@ -86,7 +86,7 @@ namespace ProjectPortfolio.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var projects = db.AProjects.Include(p => p.Funder).Include(p => p.Program).Include(p => p.Person).Include(p => p.Files).ToList();
+            var projects = db.AProjects.Include(p => p.Funder).Include(p => p.Program).Include(p => p.Files).ToList();
 
             Project project = projects.SingleOrDefault(p => p.ProjectId == id);
 
@@ -100,7 +100,7 @@ namespace ProjectPortfolio.Controllers
         // GET: Project/Create
         public ActionResult Create()
         {
-            ViewBag.PersonId = new SelectList(db.People, "PersonId", "Name");
+            //ViewBag.PersonId = new SelectList(db.People, "PersonId", "Name");
             ViewBag.ProgramId = new SelectList(db.Programs, "ProgramId", "ProgramName");
             ViewBag.FunderId = new SelectList(db.Funders, "FunderId", "Name");
             
@@ -112,7 +112,7 @@ namespace ProjectPortfolio.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name,StartDate,EndDate,Description,Budget,PersonId,FunderId,ProgramId")] Project project, HttpPostedFileBase uploadApp)
+        public ActionResult Create([Bind(Include = "Name,StartDate,EndDate,Description,Budget,Person,FunderId,ProgramId")] Project project, HttpPostedFileBase uploadApp)
         {
 
             try
@@ -146,7 +146,7 @@ namespace ProjectPortfolio.Controllers
                 ModelState.AddModelError("", "Kunne ikke gemme ændringer. Venligst forsøg igen.");
             }
 
-            ViewBag.PersonId = new SelectList(db.People, "PersonId", "FirstName", project.PersonId);
+            //ViewBag.PersonId = new SelectList(db.People, "PersonId", "FirstName", project.PersonId);
             ViewBag.ProgramId = new SelectList(db.Programs, "ProgramId", "ProgramName", project.ProgramId);
             ViewBag.FunderId = new SelectList(db.Funders, "FunderId", "Name", project.FunderId);
             return View(project);
@@ -166,7 +166,7 @@ namespace ProjectPortfolio.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.PersonId = new SelectList(db.People, "PersonId", "FirstName", project.PersonId);
+            //ViewBag.PersonId = new SelectList(db.People, "PersonId", "FirstName", project.PersonId);
             ViewBag.ProgramId = new SelectList(db.Programs, "ProgramId", "ProgramName", project.ProgramId);
             ViewBag.FunderId = new SelectList(db.Funders, "FunderId", "Name", project.FunderId);
 
@@ -194,7 +194,7 @@ namespace ProjectPortfolio.Controllers
             
             if (TryUpdateModel(projectToUpdate, "",
                 new string[] { "Name", "Status","StartDate", "EndDate", "Description",
-                    "Budget", "SelfFinancing", "Owner", "PersonId", "FunderId", "ProgramId",
+                    "Budget", "SelfFinancing", "Owner", "Person", "FunderId", "ProgramId",
                     "Responsible", "ProjectNumber", "ExtProjectNumber" }))
             {
                 try
@@ -248,7 +248,7 @@ namespace ProjectPortfolio.Controllers
                     ModelState.AddModelError("", "Kunne ikke gemme ændringer. Venligst forsøg igen.");
                 }
             }
-            ViewBag.PersonId = new SelectList(db.People, "PersonId", "FirstName", projectToUpdate.PersonId);
+            //ViewBag.PersonId = new SelectList(db.People, "PersonId", "FirstName", projectToUpdate.PersonId);
             ViewBag.ProgramId = new SelectList(db.Programs, "ProgramId", "ProgramName", projectToUpdate.ProgramId);
             ViewBag.FunderId = new SelectList(db.Funders, "FunderId", "Name", projectToUpdate.FunderId);
 

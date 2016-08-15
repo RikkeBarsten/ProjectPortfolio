@@ -35,8 +35,11 @@ namespace ProjectPortfolio.Models
         [Display(Name = "Bemærkning")]
         public string Remark { get; set; }
 
-        [ForeignKey("Person")]
-        public int? PersonId { get; set; }
+        //[ForeignKey("Person")]
+        //public int? PersonId { get; set; }
+
+        [Display(Name = "Kontaktperson")]
+        public string Person { get; set; }
 
         [Display(Name = "Ansvarlig leder/chef")]
         public string Responsible { get; set; }
@@ -47,7 +50,7 @@ namespace ProjectPortfolio.Models
 
 
         //Navigation properties
-        public virtual Person Person { get; set; }
+        //public virtual Person Person { get; set; }
         public virtual Program Program { get; set; }
 
         public virtual List<File> Files { get; set; }
