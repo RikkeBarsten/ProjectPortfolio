@@ -13,6 +13,13 @@
         
 
         <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.StartDate)
         </dt>
 
@@ -43,13 +50,19 @@
         <dd>
             @Html.DisplayFor(model => model.Budget)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.ProjectNumber)
+            @Html.DisplayNameFor(model => model.SelfFinancing)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ProjectNumber)
+            @Html.DisplayFor(model => model.SelfFinancing)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Owner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Owner)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Funder.Name)
@@ -58,6 +71,30 @@
         <dd>
             @Html.DisplayFor(model => model.Funder.Name)
         </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Program.AggName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Program.AggName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Person)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Person.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Responsible)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Responsible)
+        </dd>
+
         
         @* Vedhæftning *@
         @if (Model.Files.Any(f => f.FileType == FileType.application))
@@ -72,31 +109,44 @@
 
         @* Vedhæftning slut *@
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Person)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Person.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Program.AggName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Program.AggName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
+       @if (Model.Status.ToString() == "Bevilget")
+        {
+           
+           <dt>
+                @Html.DisplayNameFor(model => model.ProjectNumber)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-        
+            <dd>
+                @Html.DisplayFor(model => model.ProjectNumber)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ExtProjectNumber)
+            </dt>
 
-    </dl>
+            <dd>
+                @Html.DisplayFor(model => model.ExtProjectNumber)
+            </dd>
+
+                @* Vedhæftning - svarbrev *@
+                if (Model.Files.Any(f => f.FileType == FileType.response))
+                {
+                    <dt>
+                        Svarbrev fra fond
+                    </dt>
+                        <dd>
+                            @Html.ActionLink(@Model.Files.First(f => f.FileType == FileType.application).FileName, "Index", "File", new { id = @Model.Files.First(f => f.FileType == FileType.application).FileId }, null)
+                        </dd>
+                }
+
+                @* Vedhæftning slut *@
+       }
+        </dl>
+       
 </div>
+
+
 <p>
     @Html.ActionLink("Rediger", "Edit", new { id = Model.ProjectId }) |
     @Html.ActionLink("Tilbage til oversigt", "Index")
