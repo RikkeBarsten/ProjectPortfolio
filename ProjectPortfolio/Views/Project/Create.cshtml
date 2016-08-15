@@ -56,6 +56,23 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.SelfFinancing, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SelfFinancing, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SelfFinancing, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Owner, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.Owner, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Owner, "", new { @class = "text-danger" })
+            </div>
+        </div>       
+        
+        
+        <div class="form-group">
             <label class="control-label col-md-2" for="FunderId">Fond</label>
             <div class="col-md-10">
                 @Html.DropDownList("FunderId", null, string.Empty, htmlAttributes: new { @class = "form-control" })
@@ -81,9 +98,25 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.Responsible, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Responsible, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Responsible, "", new { @class = "text-danger" })
+            </div>
+        </div>   
+
+        <div class="form-group">
             @Html.Label("Ansøgning", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                <input type="file" id="Application" name="uploadApp"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
             </div>
         </div>
 

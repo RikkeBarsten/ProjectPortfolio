@@ -28,6 +28,7 @@ namespace ProjectPortfolio.Controllers
             ViewBag.DateStartSortParm = string.IsNullOrEmpty(sortOrder) ? "dateStart_desc" : "";
             ViewBag.DateEndSortParm = sortOrder == "dateEnd" ? "dateEnd_desc" : "dateEnd";
             ViewBag.NameSortParm =  sortOrder == "name" ? "name_desc" : "name";
+            ViewBag.StatusSortParm = sortOrder == "status" ? "status_desc" : "status";
             
 
             var projects = from p in db.AProjects
@@ -53,6 +54,14 @@ namespace ProjectPortfolio.Controllers
 
                 case "name_desc":
                     projects = projects.OrderByDescending(p => p.Name);
+                    break;
+
+                case "status":
+                    projects = projects.OrderBy(p => p.Status);
+                    break;
+
+                case "status_desc":
+                    projects = projects.OrderByDescending(p => p.Status);
                     break;
 
                 default:
@@ -94,6 +103,7 @@ namespace ProjectPortfolio.Controllers
             ViewBag.PersonId = new SelectList(db.People, "PersonId", "Name");
             ViewBag.ProgramId = new SelectList(db.Programs, "ProgramId", "ProgramName");
             ViewBag.FunderId = new SelectList(db.Funders, "FunderId", "Name");
+            
             return View();
         }
 

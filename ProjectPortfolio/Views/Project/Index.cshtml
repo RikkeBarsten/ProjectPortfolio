@@ -27,7 +27,8 @@
             @Html.DisplayNameFor(model => model.Funder)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.ActionLink("Status", "Index", new { sortOrder = ViewBag.StatusSortParm})
+            @*@Html.DisplayNameFor(model => model.Status)*@
         </th>
         <th></th>
     </tr>

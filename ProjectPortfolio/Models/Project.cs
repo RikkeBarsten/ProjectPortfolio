@@ -39,8 +39,6 @@ namespace ProjectPortfolio.Models
 
         public string ExtProjectNumber { get; set; }
 
-        public int MyProperty { get; set; }
-
         [ForeignKey("Funder")]
         public int? FunderId { get; set; }
 
