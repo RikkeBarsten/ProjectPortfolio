@@ -191,10 +191,11 @@ namespace ProjectPortfolio.Controllers
             //any pre-existing data in fields not listed in the Include parameter) Properties added will be updated if there is no input, it will
             // be set to null. 
             
-            // Projectnumber not added (will only be added by Controller Department)
+            
             if (TryUpdateModel(projectToUpdate, "",
                 new string[] { "Name", "Status","StartDate", "EndDate", "Description",
-                    "Budget", "PersonId", "FunderId", "ProgramId" }))
+                    "Budget", "SelfFinancing", "Owner", "PersonId", "FunderId", "ProgramId",
+                    "Responsible", "ProjectNumber", "ExtProjectNumber" }))
             {
                 try
                 {

@@ -11,7 +11,7 @@
 {
                 @Html.AntiForgeryToken()
 
-                <div class="form-horizontal">
+      <div class="form-horizontal">
         <h4>@Model.Name</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -66,10 +66,50 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FunderId, "FunderId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SelfFinancing, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SelfFinancing, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SelfFinancing, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Owner, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.Owner, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Owner, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FunderId, "Fond", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("FunderId", null, string.Empty, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.FunderId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProgramId, "Program", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ProgramId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ProgramId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PersonId, "Kontaktperson", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("PersonId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PersonId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Responsible, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Responsible, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Responsible, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -81,46 +121,20 @@
             <div class="form-group">
                 <span class="control-label col-md-2"><strong>Ansøgning</strong></span>
                 <div class="col-md-10">
-                    @Html.ActionLink(@Model.Files.First(f => f.FileType == FileType.application).FileName, "Index", "File", 
-                            new { id = @Model.Files.First(f => f.FileType == FileType.application).FileId }, null)
+                    @Html.ActionLink(@Model.Files.First(f => f.FileType == FileType.application).FileName, "Index", "File",
+                new { id = @Model.Files.First(f => f.FileType == FileType.application).FileId }, null)
                 </div>
             </div>
         }
 
         <div class="form-group">
-            @Html.Label("Erstat ansøgning", new { @class = "control-label col-md-2" })
+            @Html.Label("Tilføj/erstat ansøgning", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input type="file" id="Application" name="uploadApp" />
             </div>
         </div>
 
-        @* End attachment *@
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProgramId, "ProgramId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ProgramId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ProgramId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PersonId, "PersonId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("PersonId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.PersonId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProjectNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ProjectNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProjectNumber, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    @* End attachment *@
 
 
         @* Start attachment - response *@
@@ -137,7 +151,7 @@
         }
 
         <div class="form-group">
-            @Html.Label("Erstat svarbrev", new { @class = "control-label col-md-2" })
+            @Html.Label("Tilføj/erstat svarbrev", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input type="file" id="Response" name="uploadResponse" />
             </div>
@@ -145,11 +159,31 @@
 
         @* End attachment *@
 
+          
+          <div class="form-group" title="Projektnummer oprettes af Budget- og aktivitetsstyring">
+              @Html.LabelFor(model => model.ProjectNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+              
+              <div class="col-md-10">
+                  @Html.EditorFor(model => model.ProjectNumber, new { htmlAttributes = new { @class = "form-control" } })
+                  @Html.ValidationMessageFor(model => model.ProjectNumber, "", new { @class = "text-danger" })
+              </div>
+          </div>
+
+          <div class="form-group">
+              @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-2" })
+              <div class="col-md-10">
+                  @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                  @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+              </div>
+          </div>
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Gem" class="btn btn-default" />
             </div>
         </div>
+
+
     </div>
 }
 
