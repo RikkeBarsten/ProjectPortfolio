@@ -142,9 +142,11 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndicatorController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="DAL\PortfolioConfiguration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Models\AProject.cs" />
     <Compile Include="Models\Brief.cs" />
     <Compile Include="Models\Deadlines.cs" />

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -69,7 +70,7 @@ namespace ProjectPortfolio.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            catch
+            catch (RetryLimitExceededException)
             {
                 ModelState.AddModelError("", "Kunne ikke gemme ændringerne.Forsøg venligst igen.");
             }
@@ -113,7 +114,7 @@ namespace ProjectPortfolio.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                catch (Exception)
+                catch (RetryLimitExceededException)
                 {
                     ModelState.AddModelError("", "Kunne ikke gemme ændringerne. Forsøg venligst igen.");
                 }
