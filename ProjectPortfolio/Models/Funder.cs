@@ -18,6 +18,7 @@ namespace ProjectPortfolio.Models
         public string Description { get; set; }
 
         [Display(Name = "Hjemmeside")]
+        [DataType(DataType.Url)]
         public string Url { get; set; }
 
         // Navigation property

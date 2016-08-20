@@ -59,7 +59,7 @@ namespace ProjectPortfolio.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FunderId,Name,Description")] Funder funder)
+        public ActionResult Create([Bind(Include = "FunderId,Name,Description, Url")] Funder funder)
         {
             try
             {
@@ -107,7 +107,7 @@ namespace ProjectPortfolio.Controllers
 
             var funderToUpdate = db.Funders.Find(id);
             if (TryUpdateModel(funderToUpdate, "", 
-                new string[] {"Name", "Description" }))
+                new string[] {"Name", "Description", "Url" }))
             {
                 try
                 {
