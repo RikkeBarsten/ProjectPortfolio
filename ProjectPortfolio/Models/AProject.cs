@@ -30,9 +30,11 @@ namespace ProjectPortfolio.Models
         public DateTime EndDate { get; set; }
 
         [Display(Name = "Kort resume")]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
         [Display(Name = "Bemærkning")]
+        [DataType(DataType.MultilineText)]
         public string Remark { get; set; }
 
         //[ForeignKey("Person")]

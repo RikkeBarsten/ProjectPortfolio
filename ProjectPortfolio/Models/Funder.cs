@@ -14,6 +14,7 @@ namespace ProjectPortfolio.Models
         public string Name { get; set; }
 
         [Display(Name = "Formål")]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
         [Display(Name = "Hjemmeside")]
