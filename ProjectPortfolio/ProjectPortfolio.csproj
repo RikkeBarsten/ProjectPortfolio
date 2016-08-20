@@ -150,6 +150,11 @@
     </Compile>
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Migrations\201608201423539_InitialCreate.cs" />
+    <Compile Include="Migrations\201608201423539_InitialCreate.Designer.cs">
+      <DependentUpon>201608201423539_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AProject.cs" />
     <Compile Include="Models\Brief.cs" />
     <Compile Include="Models\Deadlines.cs" />
@@ -234,6 +239,11 @@
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>LocalizedStrings_da.designer.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201608201423539_InitialCreate.resx">
+      <DependentUpon>201608201423539_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
