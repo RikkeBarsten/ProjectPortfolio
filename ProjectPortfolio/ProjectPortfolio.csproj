@@ -143,10 +143,13 @@
     <Compile Include="Controllers\IndicatorController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="DAL\PortfolioConfiguration.cs" />
+    <Compile Include="DAL\PortfolioInterceptorLogging.cs" />
+    <Compile Include="DAL\PortfolioInterceptorTransientErrors.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\Logger.cs" />
     <Compile Include="Models\AProject.cs" />
     <Compile Include="Models\Brief.cs" />
     <Compile Include="Models\Deadlines.cs" />

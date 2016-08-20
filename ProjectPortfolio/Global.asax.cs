@@ -7,6 +7,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Data.Entity.Infrastructure.Interception;
+using ProjectPortfolio.DAL;
 
 namespace ProjectPortfolio
 {
@@ -18,6 +20,8 @@ namespace ProjectPortfolio
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            DbInterception.Add(new PortfolioInterceptorLogging());
+            DbInterception.Add(new PortfolioInterceptorTransientErrors());
             
 
 
