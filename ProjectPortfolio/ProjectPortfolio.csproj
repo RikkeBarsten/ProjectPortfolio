@@ -185,6 +185,8 @@
     <Content Include="Controllers\ControllerDiagram\ControllerDiagram.cd" />
     <Content Include="Models\ViewModels\ViewModelDiagram.cd" />
     <Content Include="DAL\DAL_diagram\DALdiagram.cd" />
+    <None Include="Properties\PublishProfiles\projectportfolio1 %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\projectportfolio1.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -197,7 +199,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
