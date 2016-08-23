@@ -30,27 +30,45 @@ namespace ProjectPortfolio.Migrations
             //    );
             //
 
-            var funders = new List<Funder>
-            {
-                new Funder { Name= "AUB",
-                    Url = "https://indberet.virk.dk/myndigheder/stat/AUB/Ansoegning_om_tilskud_fra_AER_til_faglige_udvalg_og_lokale_uddannelsesudvalg",
-                    Description ="Arbejdsgivernes Uddannelses Bidrag støtter primært praktikpladsopsøgende arbejde." },
-                new Funder { Name = "Erasmus+",
+            context.Funders.AddOrUpdate(
+                 f => f.Name,
+                 new Funder
+                 {
+                     Name = "AUB",
+                     Url = "https://indberet.virk.dk/myndigheder/stat/AUB/Ansoegning_om_tilskud_fra_AER_til_faglige_udvalg_og_lokale_uddannelsesudvalg",
+                     Description = "Arbejdsgivernes Uddannelses Bidrag støtter primært praktikpladsopsøgende arbejde."
+                 },
+                new Funder
+                {
+                    Name = "Erasmus+",
                     Url = "http://ufm.dk/uddannelse-og-institutioner/tilskud-til-udveksling-og-internationale-projekter/programoversigt/erasmusplus",
-                    Description = "EU Fond, der støtter mobilitetsprojekter på EUD-området."},
-                new Funder { Name = "TrygFonden",
+                    Description = "EU Fond, der støtter mobilitetsprojekter på EUD-området."
+                },
+                new Funder
+                {
+                    Name = "TrygFonden",
                     Url = "https://www.trygfonden.dk/soeg-stoette",
-                    Description="Privat fond, der støtter et bredt udvalg af projekter. Ansøgninsfrist for regionale projekter 1. marts og 1. september."},
-                new Funder {Name = "Kompetencefonden",
+                    Description = "Privat fond, der støtter et bredt udvalg af projekter. Ansøgninsfrist for regionale projekter 1. marts og 1. september."
+                },
+                new Funder
+                {
+                    Name = "Kompetencefonden",
                     Url = "http://www.kompetenceudvikling.dk/kompetencefonden",
-                    Description="Støtter kompetenceudviklingsprojekter"},
-                new Funder {Name="Knud Højgaard Fond",
+                    Description = "Støtter kompetenceudviklingsprojekter"
+                },
+                new Funder
+                {
+                    Name = "Knud Højgaard Fond",
                     Url = "http://www.khf.dk/",
-                    Description="Knud Højgaards Fond er en almennyttig erhvervsdrivende fond, der bl.a. støtter initiativrige studerende til at realisere drømmen om at dygtiggøre sig ved studier i udlandet."}
-            };
+                    Description = "Knud Højgaards Fond er en almennyttig erhvervsdrivende fond, " +
+                    "der bl.a. støtter initiativrige studerende til at realisere drømmen om at dygtiggøre sig ved studier i udlandet."
+                },
+                new Funder { Name = "TestFond fra seedmetode" }
+                );
+            
            
             
-            funders.ForEach(f => context.Funders.AddOrUpdate(n => n.Name, f));
+            //funders.ForEach(f => context.Funders.AddOrUpdate(n => n.Name, f));
             context.SaveChanges();
 
             var programs = new List<Program>()
@@ -60,7 +78,7 @@ namespace ProjectPortfolio.Migrations
                 new Program {ProgramId = "C", ProgramName = "Vi udvikler TECs infrastruktur" },
                 new Program {ProgramId = "D", ProgramName = "Vi udvikler TECs forretningsmæssige position" }
             };
-            programs.ForEach(p => context.Programs.AddOrUpdate(n => n.ProgramId));
+            programs.ForEach(p => context.Programs.AddOrUpdate(n => n.ProgramId, p));
             context.SaveChanges();
 
 
@@ -100,7 +118,7 @@ namespace ProjectPortfolio.Migrations
                 }
             };
 
-            projects.ForEach(p => context.AProjects.AddOrUpdate(n => n.Name));
+            projects.ForEach(p => context.AProjects.AddOrUpdate(n => n.Name, p));
             context.SaveChanges();
             
         }
