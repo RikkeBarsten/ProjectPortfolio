@@ -26,11 +26,11 @@ namespace ProjectPortfolio
             DbInterception.Add(new PortfolioInterceptorLogging());
             DbInterception.Add(new PortfolioInterceptorTransientErrors());
 
-            // CODE FIRST MIGRATIONS
-#if !DEBUG
-       var migrator = new DbMigrator(new Configuration());
-       migrator.Update();
-#endif
+            // CODE FIRST MIGRATIONS - Forcing seed without database changes while deployed
+            //#if !DEBUG
+            //       var migrator = new DbMigrator(new Configuration());
+            //       migrator.Update();
+            //#endif
 
         }
     }

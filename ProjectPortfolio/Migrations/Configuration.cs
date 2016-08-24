@@ -62,8 +62,8 @@ namespace ProjectPortfolio.Migrations
                     Url = "http://www.khf.dk/",
                     Description = "Knud Højgaards Fond er en almennyttig erhvervsdrivende fond, " +
                     "der bl.a. støtter initiativrige studerende til at realisere drømmen om at dygtiggøre sig ved studier i udlandet."
-                },
-                new Funder { Name = "TestFond fra seedmetode" }
+                }
+                
                 );
             
            
