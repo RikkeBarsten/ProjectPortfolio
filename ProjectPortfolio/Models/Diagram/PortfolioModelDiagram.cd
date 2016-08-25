@@ -3,11 +3,10 @@
   <Class Name="ProjectPortfolio.Models.AProject">
     <Position X="3.75" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gIAAAQAAAAAgAAAEAAAAAAQgBAAAAAAIAAAAAEAAAYA=</HashCode>
+      <HashCode>gIAAAQAAAAAgAAAAAAAAAAQgBAAAAAAIAAAAAEAAAYA=</HashCode>
       <FileName>Models\AProject.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Person" />
       <Property Name="Program" />
     </ShowAsAssociation>
   </Class>
@@ -21,18 +20,10 @@
       <Property Name="SteeringCommittee" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="ProjectPortfolio.Models.Person" BaseTypeListCollapsed="true">
-    <Position X="7.25" Y="0.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAEAAACAAAAQkAAAAAAQAAAAAAAAAAAAAAAAAAQg=</HashCode>
-      <FileName>Models\Person.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
   <Class Name="ProjectPortfolio.Models.Project">
     <Position X="4.75" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIAAAACEAAABACAAAAABAAAAAAAIAEAAAAAAAAAAgAA=</HashCode>
+      <HashCode>AIAAAACEAAABAAAAAAABAAAAAAAIAEAAAAAAAAAAgAA=</HashCode>
       <FileName>Models\Project.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>

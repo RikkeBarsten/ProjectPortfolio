@@ -111,7 +111,7 @@
 
 
 
-       @if (Model.Status.ToString() == "Bevilget")
+       @if ((int)Model.Status > 1)
         {
            
            <dt>
@@ -136,7 +136,7 @@
                         Svarbrev fra fond
                     </dt>
                         <dd>
-                            @Html.ActionLink(@Model.Files.First(f => f.FileType == FileType.application).FileName, "Index", "File", new { id = @Model.Files.First(f => f.FileType == FileType.application).FileId }, null)
+                            @Html.ActionLink(@Model.Files.First(f => f.FileType == FileType.response).FileName, "Index", "File", new { id = @Model.Files.First(f => f.FileType == FileType.response).FileId }, null)
                         </dd>
                 }
 

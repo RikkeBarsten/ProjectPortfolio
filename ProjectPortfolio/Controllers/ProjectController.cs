@@ -216,7 +216,14 @@ namespace ProjectPortfolio.Controllers
                         {
                             application.Content = reader.ReadBytes(uploadApp.ContentLength);
                         }
-                        projectToUpdate.Files = new List<Models.File> { application };
+                        if (projectToUpdate.Files != null)
+                        {
+                            projectToUpdate.Files.Add(application);
+                        }
+                        else
+                        {
+                            projectToUpdate.Files = new List<Models.File> { application };
+                        }
                     }
 
                     // Upload response
@@ -236,7 +243,16 @@ namespace ProjectPortfolio.Controllers
                         {
                             response.Content = reader.ReadBytes(uploadResponse.ContentLength);
                         }
-                        projectToUpdate.Files = new List<Models.File> { response };
+
+                        if (projectToUpdate.Files != null)
+                        {
+                            projectToUpdate.Files.Add(response);
+                        }
+                        else
+                        {
+                            projectToUpdate.Files = new List<Models.File> { response };
+                        }
+                        
                     }
 
 

@@ -142,7 +142,7 @@
 
         @if (Model.Files.Any(f => f.FileType == FileType.response))
         {
-            <div class="form-group" id="ba">
+            <div class="form-group skjul" id="ba" style = "display:none">
                 <span class="control-label col-md-2"><strong>Svar fra fond</strong></span>
                 <div class="col-md-10">
                     @Html.ActionLink(@Model.Files.First(f => f.FileType == FileType.response).FileName, "Index", "File",
@@ -151,7 +151,7 @@
             </div>
         }
 
-        <div class="form-group" id="ba">
+        <div class="form-group" id="ba" style = "display:none">
             @Html.Label("Tilføj/erstat svarbrev", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input type="file" id="Response" name="uploadResponse" />
@@ -206,7 +206,9 @@
 </div>
 
 <script>
-    if ("@Model.Status.ToString()" == "Bevilget") {
+    if ("@Model.Status.ToString()" == "Bevilget"
+        || "@Model.Status.ToString()" == "Afslag"
+        || "@Model.Status.ToString()" == "Afbrudt") {
         document.getElementsByClassName("skjul")[0].style.display = "block";
         document.getElementsByClassName("skjul")[1].style.display = "block";
     }
@@ -216,14 +218,17 @@
 
         console.log(option.value);
 
-        if (option.value == 2) {
-            alert("Husk at give Budgetafdelingen besked, hvis din projektansøgning er godkendt, " +
+        if (option.value > 1) {
+            if (option.value == 2) {
+                alert("Husk at give Budgetafdelingen besked, hvis din projektansøgning er godkendt, " +
                 "så du kan få et projektnummer.");
+            }
             document.getElementsByClassName("skjul")[0].style.display = "block";
             document.getElementsByClassName("skjul")[1].style.display = "block";
         }
+
     }
-    
+
 
 </script>
 
