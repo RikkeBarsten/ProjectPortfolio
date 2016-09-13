@@ -95,6 +95,7 @@
             @Html.DisplayFor(model => model.Responsible)
         </dd>
 
+
         
         @* Vedhæftning *@
         @if (Model.Files.Any(f => f.FileType == FileType.application))
@@ -142,7 +143,17 @@
 
                 @* Vedhæftning slut *@
        }
-        </dl>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Remark)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remark)
+        </dd>
+    
+    </dl>
+    
        
 </div>
 

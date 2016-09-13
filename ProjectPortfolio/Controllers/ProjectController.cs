@@ -112,7 +112,7 @@ namespace ProjectPortfolio.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name,StartDate,EndDate,Description,Budget,Person,FunderId,ProgramId")] Project project, HttpPostedFileBase uploadApp)
+        public ActionResult Create([Bind(Include = "Name,StartDate,EndDate,Description,Budget,Person,FunderId,ProgramId,Remark")] Project project, HttpPostedFileBase uploadApp)
         {
 
             try
@@ -195,7 +195,7 @@ namespace ProjectPortfolio.Controllers
             if (TryUpdateModel(projectToUpdate, "",
                 new string[] { "Name", "Status","StartDate", "EndDate", "Description",
                     "Budget", "SelfFinancing", "Owner", "Person", "FunderId", "ProgramId",
-                    "Responsible", "ProjectNumber", "ExtProjectNumber" }))
+                    "Responsible", "ProjectNumber", "ExtProjectNumber", "Remark" }))
             {
                 try
                 {
