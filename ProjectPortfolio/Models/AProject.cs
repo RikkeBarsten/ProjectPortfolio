@@ -46,6 +46,9 @@ namespace ProjectPortfolio.Models
         [Display(Name = "Ansvarlig leder/chef")]
         public string Responsible { get; set; }
 
+        [Display(Name = "Ansvarsnummer")]
+        public string RespNo { get; set; }
+
         [ForeignKey("Program")]
         [Required]
         public string ProgramId { get; set; }
