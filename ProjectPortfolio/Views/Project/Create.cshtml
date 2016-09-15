@@ -68,8 +68,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MultiplePartners, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MultiplePartners, new { htmlAttributes = new { @class = "form-control",
-               onchange = "multiplepartners(this)"} })
+                @Html.EnumDropDownListFor(model => model.MultiplePartners, new { @class = "form-control",
+               onchange = "multipleselected(this)"})
                 @Html.ValidationMessageFor(model => model.MultiplePartners, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -80,7 +80,7 @@
         <div class="form-group skjul" style="display: none">
             @Html.LabelFor(model => model.Owner, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.Owner, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EnumDropDownListFor(model => model.Owner, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Owner, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -169,16 +169,21 @@
 </div>
 
 <script>
-    function multiplepartners(element)
+    function multipleselected(element)
     {
         console.log(element.value);
+        var elements = document.getElementsByClassName("skjul");
 
-        if (element.value == "true") {
+        if (element.value == "1") {
 
-            var elements = document.getElementsByClassName("skjul");
-           
             for (var i = 0; i < elements.length; i++) {
                 elements[i].style.display = "block";
+            }
+        }
+        else  {
+           
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].style.display = "none";
             }
         }
 
