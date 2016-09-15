@@ -112,7 +112,10 @@ namespace ProjectPortfolio.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name,StartDate,EndDate,Description,Budget,Person,FunderId,ProgramId,Remark")] Project project, HttpPostedFileBase uploadApp)
+        public ActionResult Create(
+            [Bind (Include =
+            "Name,StartDate,EndDate,Description,Budget,SelfFinancing, MultiplePartners, Owner, AggregatedBudget,FunderId,ProgramId,Person,Responsible,RespNo,Remark")]
+            Project project, HttpPostedFileBase uploadApp)
         {
 
             try

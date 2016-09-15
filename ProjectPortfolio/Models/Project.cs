@@ -28,7 +28,7 @@ namespace ProjectPortfolio.Models
         public decimal? SelfFinancing { get; set; }
 
         [Display(Name = "Flere partnere?")]
-        public bool? MultiplePartners { get; set; }
+        public Multiple? MultiplePartners { get; set; }
 
         [Display(Name = "Ejer/partner")]
         public Owner? Owner { get; set; }
@@ -70,5 +70,11 @@ namespace ProjectPortfolio.Models
     {
         Ejer,
         Partner
+    }
+
+    public enum Multiple
+    {
+        Nej,
+        Ja
     }
 }
