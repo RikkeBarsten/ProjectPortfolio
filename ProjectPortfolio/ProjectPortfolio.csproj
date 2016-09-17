@@ -188,6 +188,8 @@
     <None Include="Properties\PublishProfiles\projectportfolio1 %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\projectportfolio1.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\d3.js" />
+    <Content Include="Scripts\d3.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

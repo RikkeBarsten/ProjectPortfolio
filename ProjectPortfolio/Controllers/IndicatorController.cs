@@ -29,7 +29,7 @@ namespace ProjectPortfolio.Controllers
             }
 
             //Add the list to the collection-class
-            col.BudgetList = dataB.OrderByDescending(p => p.Year).ToList();
+            col.BudgetList = dataB.OrderByDescending(p => p.Year).ToArray();
 
 
             // Set up the list of ProgramProject-class

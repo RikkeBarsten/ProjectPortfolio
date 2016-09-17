@@ -4,11 +4,75 @@
     ViewBag.Title = "Nøgletal";
 }
 
+
+<script src="~/Scripts/d3.min.js" )></script>
+<div class="row">
+    <div id="budgetBarChart" class="chart" style="padding-top: 50px"></div>
+
+    <script>
+        (function (d3) {
+
+            var data = @Html.Raw(Json.Encode(@Model.BudgetList));
+            var datalength = Object.keys(data).length;
+
+
+            console.log(datalength);
+            console.log(data[0].Budget);
+            console.log(data[1].Budget);
+            console.log(data[2].Budget);
+
+            var margin = {top: 20, right: 20, bottom: 30, left: 40},
+                width = 700 - margin.left - margin.right,
+                height = 350 - margin.top - margin.bottom;
+
+            //Ranges
+            var x = d3.scaleBand()
+            .range([0, width])
+            .padding(0.1)
+            .domain(d3.range(datalength));
+
+            var y = d3.scaleLinear()
+            .range([0, height])
+            .domain([0, d3.max(data, function(d){return d.Budget})]);
+
+
+            // append the svg object to the body of the page
+            // append a 'group' element to 'svg'
+            // moves the 'group' element to the top left margin
+
+            var svg = d3.select("#budgetBarChart").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom);
+            //.append("g")
+            //.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+            svg.selectAll("rect")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("x", function(d, i){ return x(i)})
+            .attr("y", function(d){return height - y(d.Budget)})
+            .attr("width", x.bandwidth())
+            .attr("height", function(d){return y(d.Budget)});
+
+
+
+
+
+
+        })(window.d3)
+
+
+
+    </script>
+</div>
+@* End of barchart row *@ 
 <div class="row">
     <div class="col-md-6">
         <h2>Igangværende projekter pr. år - budget</h2>
 
-        <p>
+        <p>            
             <table class="table">
                 <tr>
                     <th>
@@ -70,3 +134,5 @@
 
     </div>
 </div>
+
+<script src="~/Scripts/d3.min.js")></script>
