@@ -27,18 +27,27 @@ namespace ProjectPortfolio.Models
         [DataType(DataType.Currency)]
         public decimal? SelfFinancing { get; set; }
 
+        [Display(Name = "Flere partnere?")]
+        public Multiple? MultiplePartners { get; set; }
+
         [Display(Name = "Ejer/partner")]
         public Owner? Owner { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:C0}")]
+        [Display(Name = "Samlet budget (partnere)")]
+        [Range(0.1, 10000000)]
+        [DataType(DataType.Currency)]
+        public decimal? AggregatedBudget { get; set; }
 
         [DisplayFormat(NullDisplayText = "Ikke tildelt")]
         [Display(Name = "Projektnummer")]
         public int? ProjectNumber { get; set; }
 
-        [Required]
-        public Status Status { get; set; }
-
         [Display(Name = "Eksternt projektnummer")]
         public string ExtProjectNumber { get; set; }
+
+        [Required]
+        public Status Status { get; set; }
 
         [ForeignKey("Funder")]
         public int? FunderId { get; set; }
@@ -61,5 +70,11 @@ namespace ProjectPortfolio.Models
     {
         Ejer,
         Partner
+    }
+
+    public enum Multiple
+    {
+        Nej,
+        Ja
     }
 }

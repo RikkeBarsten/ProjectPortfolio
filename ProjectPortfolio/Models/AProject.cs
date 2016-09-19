@@ -46,6 +46,13 @@ namespace ProjectPortfolio.Models
         [Display(Name = "Ansvarlig leder/chef")]
         public string Responsible { get; set; }
 
+        [Display(Name = "Ansvarsnummer")]
+        public string RespNo { get; set; }
+
+        [Display(Name = "Link til projekt")]
+        [DataType(DataType.Url)]
+        public string ProjectLink { get; set; }
+
         [ForeignKey("Program")]
         [Required]
         public string ProgramId { get; set; }

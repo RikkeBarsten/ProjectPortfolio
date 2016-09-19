@@ -11,7 +11,7 @@ namespace ProjectPortfolio.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             ContextKey = "ProjectPortfolio.DAL.PortfolioContext";
         }
 

@@ -10,7 +10,7 @@ namespace ProjectPortfolio.Models
         [Key]
         public int FunderId { get; set; }
 
-        [Display(Name = "Fond")]
+        [Display(Name = "Bevillingstype")]
         public string Name { get; set; }
 
         [Display(Name = "Formål")]

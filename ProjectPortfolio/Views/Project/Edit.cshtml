@@ -83,7 +83,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FunderId, "Fond", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.FunderId, "Bevillingstype", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("FunderId", null, string.Empty, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.FunderId, "", new { @class = "text-danger" })
@@ -164,7 +164,7 @@
           
 
           
-          <div class="form-group skjul"  title="Projektnummer oprettes af Budget- og aktivitetsstyring" style = "display:none" >
+          <div class="form-group"  title="Projektnummer oprettes af Budget- og aktivitetsstyring" >
               @Html.LabelFor(model => model.ProjectNumber, htmlAttributes: new { @class = "control-label col-md-2" })
               
               <div class="col-md-10">

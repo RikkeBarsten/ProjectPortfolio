@@ -62,14 +62,41 @@
                 @Html.ValidationMessageFor(model => model.SelfFinancing, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        
+   
+        
         <div class="form-group">
+            @Html.LabelFor(model => model.MultiplePartners, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.MultiplePartners, new { @class = "form-control",
+               onchange = "multipleselected(this)"})
+                @Html.ValidationMessageFor(model => model.MultiplePartners, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @* Kun for projekter med flere partnere - If MultiplePartners == true *@
+
+
+        <div class="form-group skjul" style="display: none">
             @Html.LabelFor(model => model.Owner, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.Owner, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EnumDropDownListFor(model => model.Owner, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Owner, "", new { @class = "text-danger" })
             </div>
-        </div>       
+        </div>
+
+        <div class="form-group skjul" style="display: none">
+            @Html.LabelFor(model => model.AggregatedBudget, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AggregatedBudget, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AggregatedBudget, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        @* Resten er for alle *@
+
+               
         
         
         <div class="form-group">
@@ -103,6 +130,14 @@
                 @Html.EditorFor(model => model.Responsible, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Responsible, "", new { @class = "text-danger" })
             </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.RespNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RespNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RespNo, "", new { @class = "text-danger" })
+            </div>
         </div>   
 
         <div class="form-group">
@@ -133,6 +168,31 @@
     @Html.ActionLink("Tilbage til oversigten", "Index")
 </div>
 
+<script>
+    function multipleselected(element)
+    {
+        console.log(element.value);
+        var elements = document.getElementsByClassName("skjul");
+
+        if (element.value == "1") {
+
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].style.display = "block";
+            }
+        }
+        else  {
+           
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].style.display = "none";
+            }
+        }
+
+    }
+</script>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+
+
