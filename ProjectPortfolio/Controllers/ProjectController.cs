@@ -114,7 +114,7 @@ namespace ProjectPortfolio.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(
             [Bind (Include =
-            "Name,StartDate,EndDate,Description,Budget,SelfFinancing, MultiplePartners, Owner, AggregatedBudget,FunderId,ProgramId,Person,Responsible,RespNo,Remark")]
+            "Name,StartDate,EndDate,Description,Budget,SelfFinancing, MultiplePartners, Owner, AggregatedBudget,FunderId,ProgramId,Person,Responsible,RespNo,ProjectLink, Remark")]
             Project project, HttpPostedFileBase uploadApp)
         {
 
@@ -197,8 +197,8 @@ namespace ProjectPortfolio.Controllers
             
             if (TryUpdateModel(projectToUpdate, "",
                 new string[] { "Name", "Status","StartDate", "EndDate", "Description",
-                    "Budget", "SelfFinancing", "Owner", "Person", "FunderId", "ProgramId",
-                    "Responsible", "ProjectNumber", "ExtProjectNumber", "Remark" }))
+                    "Budget", "SelfFinancing", "MultiplePartners", "Owner", "AggregatedBudget", "Person", "FunderId", "ProgramId",
+                    "Responsible", "RespNo", "ProjectNumber", "ExtProjectNumber", "ProjectLink", "Remark" }))
             {
                 try
                 {

@@ -57,13 +57,24 @@
         <dd>
             @Html.DisplayFor(model => model.SelfFinancing)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Owner)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Owner)
-        </dd>
+        @if (Model.MultiplePartners == Multiple.Ja)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Owner)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Owner)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.AggregatedBudget)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.AggregatedBudget)
+            </dd>
+        }
+
         <dt>
             @Html.DisplayNameFor(model => model.Funder.Name)
         </dt>
@@ -94,8 +105,14 @@
         <dd>
             @Html.DisplayFor(model => model.Responsible)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RespNo)
+        </dt>
 
-
+        <dd>
+            @Html.DisplayFor(model => model.RespNo)
+        </dd>
+        
         
         @* Vedhæftning *@
         @if (Model.Files.Any(f => f.FileType == FileType.application))
@@ -150,6 +167,13 @@
 
         <dd>
             @Html.DisplayFor(model => model.Remark)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectLink)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectLink)
         </dd>
     
     </dl>

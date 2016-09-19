@@ -74,11 +74,27 @@
             </div>
         </div>
         
-        <div class="form-group">
-            @Html.LabelFor(model => model.Owner, htmlAttributes: new { @class = "control-label col-md-2" })
+          <div class="form-group">
+              @Html.LabelFor(model => model.MultiplePartners, htmlAttributes: new { @class = "control-label col-md-2" })
+              <div class="col-md-10">
+                  @Html.EnumDropDownListFor(model => model.MultiplePartners, new { @class = "form-control", onchange = "multiplep(this)" })
+                  @Html.ValidationMessageFor(model => model.MultiplePartners, "", new { @class = "text-danger" })
+              </div>
+          </div>
+
+          <div class="form-group skjulMultiple">
+              @Html.LabelFor(model => model.Owner, htmlAttributes: new { @class = "control-label col-md-2" })
+              <div class="col-md-10">
+                  @Html.EnumDropDownListFor(model => model.Owner, new { @class = "form-control" })
+                  @Html.ValidationMessageFor(model => model.Owner, "", new { @class = "text-danger" })
+              </div>
+          </div>
+          
+          <div class="form-group skjulMultiple">
+            @Html.LabelFor(model => model.AggregatedBudget, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.Owner, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Owner, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.AggregatedBudget, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AggregatedBudget, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -114,6 +130,14 @@
             </div>
         </div>
 
+          <div class="form-group">
+              @Html.LabelFor(model => model.RespNo, htmlAttributes: new { @class = "control-label col-md-2" })
+              <div class="col-md-10">
+                  @Html.EditorFor(model => model.RespNo, new { htmlAttributes = new { @class = "form-control" } })
+                  @Html.ValidationMessageFor(model => model.RespNo, "", new { @class = "text-danger" })
+              </div>
+          </div>
+
 
         @* Start attachment - application *@
 
@@ -142,7 +166,7 @@
 
         @if (Model.Files.Any(f => f.FileType == FileType.response))
         {
-            <div class="form-group skjul" style = "display:none">
+            <div class="form-group skjulStatus" style = "display:none">
                 <span class="control-label col-md-2"><strong>Svar fra fond</strong></span>
                 <div class="col-md-10">
                     @Html.ActionLink(@Model.Files.First(f => f.FileType == FileType.response).FileName, "Index", "File",
@@ -151,7 +175,7 @@
             </div>
         }
 
-        <div class="form-group skjul" style = "display:none">
+        <div class="form-group skjulStatus" style = "display:none">
             @Html.Label("Tilføj/erstat svarbrev", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input type="file" id="Response" name="uploadResponse" />
@@ -174,7 +198,7 @@
           </div>
 
           
-          <div class="form-group skjul" style="display:none">
+          <div class="form-group skjulStatus" style="display:none">
               @Html.LabelFor(model => model.ExtProjectNumber, htmlAttributes: new { @class = "control-label col-md-2" })
 
               <div class="col-md-10">
@@ -188,6 +212,14 @@
               <div class="col-md-10">
                   @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
                   @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+              </div>
+          </div>
+
+          <div class="form-group">
+              @Html.LabelFor(model => model.ProjectLink, htmlAttributes: new { @class = "control-label col-md-2" })
+              <div class="col-md-10">
+                  @Html.EditorFor(model => model.ProjectLink, new { htmlAttributes = new { @class = "form-control" } })
+                  @Html.ValidationMessageFor(model => model.ProjectLink, "", new { @class = "text-danger" })
               </div>
           </div>
 
@@ -206,11 +238,20 @@
 </div>
 
 <script>
+    var multiple = document.getElementsByClassName("skjulMultiple");
+    
     if ("@Model.Status.ToString()" == "Bevilget"
         || "@Model.Status.ToString()" == "Afslag"
         || "@Model.Status.ToString()" == "Afbrudt") {
-        document.getElementsByClassName("skjul")[0].style.display = "block";
-        document.getElementsByClassName("skjul")[1].style.display = "block";
+        document.getElementsByClassName("skjulStatus")[0].style.display = "block";
+        document.getElementsByClassName("skjulStatus")[1].style.display = "block";
+    }
+    if ("@Model.MultiplePartners.ToString()" == "Nej"
+        || "@Model.MultiplePartners.ToString()" == null) {
+        
+        for (var i = 0; i < multiple.length; i++) {
+            multiple[i].style.display = "none";
+        }
     }
 
 
@@ -223,10 +264,26 @@
                 alert("Husk at give Budgetafdelingen besked, hvis din projektansøgning er godkendt, " +
                 "så du kan få et projektnummer.");
             }
-            document.getElementsByClassName("skjul")[0].style.display = "block";
-            document.getElementsByClassName("skjul")[1].style.display = "block";
+            document.getElementsByClassName("skjulStatus")[0].style.display = "block";
+            document.getElementsByClassName("skjulStatus")[1].style.display = "block";
         }
 
+    }
+
+    function multiplep(option) {
+
+        console.log("Multiple called: " + option.value);
+
+        if (option.value == 1) {
+            for (var i = 0; i < multiple.length; i++) {
+                multiple[i].style.display = "block";
+            }
+        }
+        else {
+            for (var i = 0; i < multiple.length; i++) {
+                multiple[i].style.display = "none";
+            }
+        }
     }
 
 
