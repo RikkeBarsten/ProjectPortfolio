@@ -14,8 +14,12 @@
 */
 .dl-horizontal dt {
     white-space: normal;
+    min-width: 180px;
 }
 
+.dl-horizontal dd {
+    margin-left: 200px;
+}
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
@@ -50,7 +54,7 @@ textarea {
     visibility: visible;
 }
 
-
+/*Styles for d3 visualizations*/
 .chart rect {
   fill: steelblue;
 }
