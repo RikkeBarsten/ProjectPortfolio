@@ -96,8 +96,8 @@
                     return height - y(d.Budget) + 15;
                 })
                 .attr("text-anchor", "middle")
-                .text(function (d) { return d.Year; })
-                .attr("style", "font-weight: bold");
+                .text(function (d) { return d.Year; });
+                
 
 
 
@@ -141,6 +141,8 @@
 
             (function (data) {
 
+                
+
                 var PieData = Object.keys(data).map(function (k) { return data[k] });
                 console.log("Length: " + PieData.length);
                 
@@ -155,7 +157,10 @@
                     width = 700 - margin.left - margin.right,
                     height = 700 - margin.top - margin.bottom,
                     radius = Math.min(width, height) / 2,
-                    donutWidth = 75;
+                    donutWidth = 75
+
+                var legendRectSize = 18,
+                    legendSpacing = 4;
 
                 var color = d3.scaleOrdinal(d3.schemeCategory10);
 
@@ -204,6 +209,54 @@
                       .style('left', (d3.event.layerX + 10) + 'px');
                 });
 
+                var legend = svg.selectAll('.legend')
+                .data(color.domain())
+                .enter()
+                .append('g')
+                .attr('class', 'legend')
+                .attr('transform', function (d, i) {
+                    var height = legendRectSize + legendSpacing;
+                    var offset = height * color.domain().length / 2;
+                    var horz = -7 * legendRectSize;
+                    var vert = i * height - offset;
+                    return 'translate(' + horz + ',' + vert + ')';
+                });
+
+                legend.append('rect')
+                  .attr('width', legendRectSize)
+                  .attr('height', legendRectSize)
+                  .style('fill', color)
+                  .style('stroke', color);
+                  //.on("click", function (label) {
+                  //    var rect = d3.select(this);
+                  //    var enabled = true;
+                  //    var totalEnabled = d3.sum(dataset.map(function (d) {
+                  //        return (d.enabled) ? 1 : 0;
+                      
+                  //});
+
+                legend.append('text')
+                 .attr('x', legendRectSize + legendSpacing)
+                 .attr('y', legendRectSize - legendSpacing)
+                 .text(function (d) {
+                     switch (d) {
+                         case "A":
+                             return "A Vi styrker TECs ledere og medarbejdere"
+                             break;
+                         case "B":
+                             return "B Vi styrker TECs kerneydelse"
+                             break;
+                         case "C":
+                             return "C Vi styrker TECs infrastruktur"
+                             break;
+                         case "D":
+                             return "D Vi styrker TECs forretningsmæssige position"
+                             break;
+                         default:
+                             return"Kunne ikke finde tekst"
+
+                     }
+                 });
 
 
 
@@ -217,7 +270,9 @@
 
 
     </script>
-    <div class="row">
+    
+
+@*<div class="row">
         <div class="col-md-6">
             <h2>Igangværende projekter pr. år - budget</h2>
 
@@ -282,4 +337,4 @@
             </p>
 
         </div>
-    </div>
+    </div>*@

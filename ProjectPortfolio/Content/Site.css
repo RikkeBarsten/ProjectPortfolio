@@ -72,7 +72,13 @@ textarea {
 /*Styles for d3 visualizations*/
 
 
-.chart text {
+#themePieChart text {
+  fill: black;
+  font: 12px sans-serif;
+
+}
+
+#budgetBarChart text {
   fill: white;
   font: 10px sans-serif;
 
