@@ -8,11 +8,21 @@
 
 <p>@Html.ActionLink("Opret nyt projekt", "Create")<p>
 
+    @using (Html.BeginForm("Index", "Project", FormMethod.Get))
+    {
+        <p>
+            Søg efter navn, indhold eller kontaktperson: @Html.TextBox("searchString")
+            <input type = "submit" value = "Søg"/>
+
+
+           </p>
+    }
+
 
 <table class="table table-hover table-condensed">
     <tr>
         <th>
-            @Html.ActionLink("Navn", "Index", new { sortOrder = ViewBag.NameSortParm})
+            @Html.ActionLink("Navn", "Index", new { sortOrder = ViewBag.NameSortParm })
         </th>
         <th>
             @Html.ActionLink("Projektstart", "Index", new { sortOrder = ViewBag.DateStartSortParm})

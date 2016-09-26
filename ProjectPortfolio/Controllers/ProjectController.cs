@@ -18,7 +18,8 @@ namespace ProjectPortfolio.Controllers
         private PortfolioContext db = new PortfolioContext();
 
         // GET: Project
-        public ActionResult Index(string sortOrder)
+       
+        public ActionResult Index(string sortOrder, string searchString)
         {
             // When no sortOrder is selected (IsNullOrEmpty is true) 
             // the sort should be by name ascending - the first time true the last case
@@ -34,17 +35,27 @@ namespace ProjectPortfolio.Controllers
             var projects = from p in db.AProjects
                            select p;
 
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                projects = projects.Where(p => p.Name.Contains(searchString)
+                                            || p.Description.Contains(searchString)
+                                            || p.Remark.Contains(searchString)
+                                            || p.Person.Contains(searchString)
+                                             );
+            }
+
+
             switch (sortOrder)
             {
                 case "dateStart_desc":
                     projects = projects.OrderByDescending(p => p.StartDate);
                     break;
 
-                case "DateEnd":
+                case "dateEnd":
                     projects = projects.OrderBy(p => p.EndDate);
                     break;
 
-                case "DateEnd_desc":
+                case "dateEnd_desc":
                     projects = projects.OrderByDescending(p => p.EndDate);
                     break;
 
