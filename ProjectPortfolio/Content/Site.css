@@ -27,6 +27,10 @@ textarea {
     max-width: 280px;
 }
 
+hr .form-line {
+    margin: 10px;
+}
+
 /* Tooltip container */
 .tooltip {
     position: relative;
