@@ -17,8 +17,29 @@ namespace ProjectPortfolio.Controllers
     {
         private PortfolioContext db = new PortfolioContext();
 
-        // GET: Project
+        // Setting up Dictionary for initiative-dropdownlist
+        private Dictionary<string, List<string>> Initiative =
+            new Dictionary<string, List<string>>()
+            {
+                {"Primært indsatsområde",
+                    new List<string> { "Fag-faglighed", "Mobilitet", "Ind- og udskoling",
+                                        "Innovation", "Lokal PDS-indsats", "Pædagogisk IT",
+                                        "Skole-virksomhedssamarbejde", "Skriftlighed", "Talent" }
+                },
+                {
+                    "Underindsatsområde",
+                    new List<string> {"Ind- og udskoling", "Innovation", "Lokal PDS-indsats",
+                                        "Pædagogisk IT", "Skole-virksomhedssamarbejde", "Skriftlighed",
+                                        "Talent", "Internationalisering", "Praktikpladser" }
+                }
+
+            };
+
        
+
+
+        // GET: Project
+
         public ActionResult Index(string sortOrder, string searchString)
         {
             // When no sortOrder is selected (IsNullOrEmpty is true) 
@@ -114,7 +135,10 @@ namespace ProjectPortfolio.Controllers
             //ViewBag.PersonId = new SelectList(db.People, "PersonId", "Name");
             ViewBag.ProgramId = new SelectList(db.Programs, "ProgramId", "ProgramName");
             ViewBag.FunderId = new SelectList(db.Funders, "FunderId", "Name");
-            
+
+            ViewBag.PrimaryFocus = new SelectList(Initiative.ElementAt(0).Value);
+            ViewBag.SecondaryFocus = new SelectList(Initiative.ElementAt(1).Value);
+
             return View();
         }
 
@@ -125,7 +149,7 @@ namespace ProjectPortfolio.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(
             [Bind (Include =
-            "Name,StartDate,EndDate,Description,Budget,SelfFinancing, MultiplePartners, Owner, AggregatedBudget,FunderId,ProgramId,Person,Responsible,RespNo,ProjectLink, Remark")]
+            "Name,StartDate,EndDate,Description,Budget,SelfFinancing, MultiplePartners, Owner, AggregatedBudget,FunderId,ProgramId,PrimaryFocus,SecondaryFocus,Person,Responsible,RespNo,ProjectLink, Remark")]
             Project project, HttpPostedFileBase uploadApp)
         {
 
@@ -163,6 +187,10 @@ namespace ProjectPortfolio.Controllers
             //ViewBag.PersonId = new SelectList(db.People, "PersonId", "FirstName", project.PersonId);
             ViewBag.ProgramId = new SelectList(db.Programs, "ProgramId", "ProgramName", project.ProgramId);
             ViewBag.FunderId = new SelectList(db.Funders, "FunderId", "Name", project.FunderId);
+
+            ViewBag.PrimaryFocus = new SelectList(Initiative.ElementAt(0).Value);
+            ViewBag.SecondaryFocus = new SelectList(Initiative.ElementAt(1).Value);
+
             return View(project);
         }
 
@@ -183,6 +211,9 @@ namespace ProjectPortfolio.Controllers
             //ViewBag.PersonId = new SelectList(db.People, "PersonId", "FirstName", project.PersonId);
             ViewBag.ProgramId = new SelectList(db.Programs, "ProgramId", "ProgramName", project.ProgramId);
             ViewBag.FunderId = new SelectList(db.Funders, "FunderId", "Name", project.FunderId);
+
+            ViewBag.PrimaryFocus = new SelectList(Initiative.ElementAt(0).Value, project.PrimaryFocus);
+            ViewBag.SecondaryFocus = new SelectList(Initiative.ElementAt(1).Value, project.SecondaryFocus);
 
             return View(project);
         }
@@ -209,7 +240,7 @@ namespace ProjectPortfolio.Controllers
             if (TryUpdateModel(projectToUpdate, "",
                 new string[] { "Name", "Status","StartDate", "EndDate", "Description",
                     "Budget", "SelfFinancing", "MultiplePartners", "Owner", "AggregatedBudget", "Person", "FunderId", "ProgramId",
-                    "Responsible", "RespNo", "ProjectNumber", "ExtProjectNumber", "ProjectLink", "Remark" }))
+                    "PrimaryFocus", "SecondaryFocus", "Responsible", "RespNo", "ProjectNumber", "ExtProjectNumber", "ProjectLink", "Remark" }))
             {
                 try
                 {
@@ -281,6 +312,9 @@ namespace ProjectPortfolio.Controllers
             //ViewBag.PersonId = new SelectList(db.People, "PersonId", "FirstName", projectToUpdate.PersonId);
             ViewBag.ProgramId = new SelectList(db.Programs, "ProgramId", "ProgramName", projectToUpdate.ProgramId);
             ViewBag.FunderId = new SelectList(db.Funders, "FunderId", "Name", projectToUpdate.FunderId);
+
+            ViewBag.PrimaryFocus = new SelectList(Initiative.ElementAt(0).Value, projectToUpdate.PrimaryFocus);
+            ViewBag.SecondaryFocus = new SelectList(Initiative.ElementAt(1).Value, projectToUpdate.SecondaryFocus);
 
             return View(projectToUpdate);
         }

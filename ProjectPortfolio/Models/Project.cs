@@ -49,6 +49,12 @@ namespace ProjectPortfolio.Models
         [Required]
         public Status Status { get; set; }
 
+        [Display(Name = "Primært indsatsområde")]
+        public String PrimaryFocus { get; set; }
+
+        [Display(Name = "Underindsatsområde")]
+        public string SecondaryFocus { get; set; }
+
         [ForeignKey("Funder")]
         public int? FunderId { get; set; }
 
@@ -77,4 +83,6 @@ namespace ProjectPortfolio.Models
         Nej,
         Ja
     }
+
+    
 }

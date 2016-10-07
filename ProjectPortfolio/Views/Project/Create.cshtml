@@ -115,6 +115,22 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <label class="control-label col-md-2" for="PrimaryFocus">Primært indsatsområde</label>
+            <div class="col-md-10">
+                @Html.DropDownList("PrimaryFocus", null, string.Empty, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PrimaryFocus, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="SecondaryFocus">Underindsatsområde</label>
+            <div class="col-md-10">
+                @Html.DropDownList("SecondaryFocus", null, string.Empty, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SecondaryFocus, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
         
         <div class="form-group">
             @Html.LabelFor(model => model.Person, htmlAttributes: new { @class = "control-label col-md-2" })
