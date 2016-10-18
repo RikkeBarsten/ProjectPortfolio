@@ -5,7 +5,6 @@ using System.Net;
 using System.Web.Mvc;
 using ProjectPortfolio.Models;
 using ProjectPortfolio.DAL;
-using Bibliotek.SortSearch;
 using System.Data;
 using System.Data.Entity.Infrastructure;
 using System.Web;
