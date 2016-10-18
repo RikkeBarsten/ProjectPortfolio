@@ -62,8 +62,8 @@
              <tr>
                  <td>@Html.ActionLink(item.Name, "Details", "Project", new { id = item.ProjectId }, null)</td>
                  <td>@item.StartDate.ToShortDateString()</td>
-                 <td>@item.Person</td>
-                 <td>@item.Status.ToString()</td>
+                 <td>@Html.DisplayFor(modelItem => item.Person)</td>
+                 <td>@Html.DisplayFor(modelItem => item.Status)</td>
                  
              </tr>
          }

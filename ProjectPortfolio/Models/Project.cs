@@ -5,6 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+
 namespace ProjectPortfolio.Models
 {
     public class Project : AProject
@@ -67,7 +68,11 @@ namespace ProjectPortfolio.Models
     {
         Ny,
         Ansøgt,
-        Bevilget,
+        [Display(Name = "Bevilget - Ikke startet")]
+        Bevilget_IS,
+        [Display(Name = "Bevilget - Startet")]
+        Bevilget_S,
+        Lukket,
         Afslag,
         Afbrudt
     }
