@@ -47,7 +47,11 @@ namespace ProjectPortfolio.Models
         public string Responsible { get; set; }
 
         [Display(Name = "Ansvarsnummer")]
-        public string RespNo { get; set; }
+        [Range(1000, 9999, ErrorMessage = "Ansvarsnummer skal være et tal mellem 1000 og 9999")]
+        public int? RespNo { get; set; }
+
+        [Display(Name = "Afdeling")]
+        public string Section { get; set; }
 
         [Display(Name = "Link til projekt")]
         [DataType(DataType.Url)]
@@ -65,6 +69,20 @@ namespace ProjectPortfolio.Models
         public virtual List<File> Files { get; set; }
 
 
+
+        //Set section based on RespNo
+
+        public void SetSection(int? RespNo)
+        {
+            if (RespNo <= 3000)
+            {
+                this.Section = "Stab";
+            }
+            else if (RespNo > 3000 && RespNo <= 9999 )
+            {
+                this.Section = "Uddannelsesafdeling";
+            }
+        }
        
     }
 

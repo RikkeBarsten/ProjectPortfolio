@@ -60,7 +60,7 @@ namespace ProjectPortfolio.Models
         public int? FunderId { get; set; }
 
         //Navigation property
-        [Display(Name = "Fond")]
+        [Display(Name = "Bevillingstype")]
         public virtual Funder Funder { get; set; }
     }
 
