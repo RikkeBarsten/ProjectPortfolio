@@ -10,7 +10,7 @@ using System.Net;
 using ProjectPortfolio.Models;
 using System.Data;
 using System.Data.Entity.Infrastructure;
-
+using System.Web.Routing;
 
 namespace ProjectPortfolio.Controllers
 {
@@ -26,6 +26,17 @@ namespace ProjectPortfolio.Controllers
             var fileToRetrieve = db.Files.Find(id);
 
             return File(fileToRetrieve.Content, fileToRetrieve.ContentType);
+        }
+
+        //POST: Delete
+
+        public ActionResult Delete(int id, Guid p_id)
+        {
+            var fileToDelete = db.Files.Find(id);
+            db.Files.Remove(fileToDelete);
+            db.SaveChanges();
+
+            return RedirectToAction("Edit","Project", new {id=p_id });
         }
 
         //GET: Csv
