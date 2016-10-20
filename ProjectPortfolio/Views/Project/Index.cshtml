@@ -6,17 +6,20 @@
 
 <h2>Oversigt over projekter</h2>
 
-<p>@Html.ActionLink("Opret nyt projekt", "Create")<p>
+<p>@Html.ActionLink("Opret nyt projekt", "Create") | <a align="right" href="@Url.Action("ExportToCsv", "File")">Hent projektliste som csv</a><p>
 
+    
     @using (Html.BeginForm("Index", "Project", FormMethod.Get))
     {
         <p>
             Søg efter navn, indhold eller kontaktperson: @Html.TextBox("searchString")
             <input type = "submit" value = "Søg"/>
-
-
-           </p>
+        </p>
     }
+    
+<br />
+
+   
 
 
 <table class="table table-hover table-condensed">
