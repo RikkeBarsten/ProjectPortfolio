@@ -170,6 +170,7 @@
     <Compile Include="Models\ViewModels\FunderProjects.cs" />
     <Compile Include="Models\ViewModels\ProgramProjects.cs" />
     <Compile Include="Models\ViewModels\ProjectsBudget.cs" />
+    <Compile Include="Models\ViewModels\Sunburst.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

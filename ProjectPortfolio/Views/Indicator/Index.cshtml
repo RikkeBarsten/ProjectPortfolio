@@ -17,11 +17,11 @@
 </div>
 @* End of piechart row *@
 
-<div class="row">
+@*<div class="row">
     <h3>Sunburst</h3>
     <div id="sunBurstChart" class="chart"></div>
-</div>
-@* End of piechart row *@
+</div>*@
+@* End of sunburst row *@
     <script>
         (function (d3) {
 
@@ -324,7 +324,7 @@
 
 
 
-            })(@ViewBag.sunBurstString));*@
+            })(@ViewBag.sunBurstJson));*@
 
 
         })(window.d3)
