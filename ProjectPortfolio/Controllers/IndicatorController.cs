@@ -46,15 +46,15 @@ namespace ProjectPortfolio.Controllers
             col.ProgramList = dataP;
 
 
-            StringBuilder sunString = new StringBuilder();
+            //StringBuilder sunString = new StringBuilder();
 
-            foreach(var p in db.AProjects)
-            {
-                sunString.Append(p.ProgramId + "-" + p.PrimaryFocus.Replace("-", "") + "-" + p.SecondaryFocus.Replace("-", "") + ",");
-            }
+            //foreach(var p in db.AProjects)
+            //{
+            //    sunString.Append(p.ProgramId + "-" + p.PrimaryFocus.Replace("-", "") + "-" + p.SecondaryFocus.Replace("-", "") + ",");
+            //}
             
 
-            ViewBag.sunBurstString = sunString.ToString();
+            //ViewBag.sunBurstString = sunString.ToString();
             
 
             return View(col);
