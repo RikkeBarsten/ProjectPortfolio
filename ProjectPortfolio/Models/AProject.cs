@@ -74,13 +74,41 @@ namespace ProjectPortfolio.Models
 
         public void SetSection(int? RespNo)
         {
-            if (RespNo <= 3000)
+            if (RespNo >= 3000 && RespNo < 4000 )
             {
                 this.Section = "Stab";
             }
-            else if (RespNo > 3000 && RespNo <= 9999 )
+            else if (RespNo >= 5100 && RespNo < 5200)
             {
-                this.Section = "Uddannelsesafdeling";
+                this.Section = "Unge, vejledning og erhverv";
+            }
+            else if (RespNo >= 5300 && RespNo < 5400)
+            {
+                this.Section = "El, Automation og Data";
+            }
+            else if (RespNo >= 5400 && RespNo < 5500)
+            {
+                this.Section = "Byggeri, Produktion og Service";
+            }
+            else if (RespNo >= 5600 && RespNo < 5700)
+            {
+                this.Section = "H.C. Ørsted Gymnasiet";
+            }
+            else if (RespNo >= 5700 && RespNo < 5800)
+            {
+                this.Section = "Praktikcenteret";
+            }
+            else if (RespNo >= 5900 && RespNo < 6000)
+            {
+                this.Section = "Mekanik, Transport og Aviation";
+            }
+            else if (RespNo >= 2200 && RespNo < 2300 )
+            {
+                this.Section = "Eniga";
+            }
+            else
+            {
+                this.Section = "Ukendt afdeling";
             }
         }
        
