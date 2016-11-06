@@ -31,10 +31,11 @@ textarea {
 .tooltip {
     position: relative;
     display: inline-block;
-    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+    border-bottom: 1px dotted black; 
+                    
 }
-
-/* Tooltip text */
+    
+/*/* Tooltip text */
 .tooltip .tooltiptext {
     visibility: hidden;
     width: 120px;
@@ -44,12 +45,12 @@ textarea {
     padding: 5px 0;
     border-radius: 6px;
  
-    /* Position the tooltip text - see examples below! */
+     /*Position the tooltip text - see examples below! */
     position: absolute;
     z-index: 1;
 }
 
-  .pietooltip {
+  .tooltips {
       background: #eee;                                               /* NEW */
         box-shadow: 0 0 5px #999999;                                    /* NEW */
         color: #333;                                                    /* NEW */
@@ -60,7 +61,7 @@ textarea {
         position: absolute;                                             /* NEW */
         text-align: center;                                             /* NEW */
         top: 95px;                                                      /* NEW */
-        width: 80px;                                                    /* NEW */
+        width: 110px;                                                    /* NEW */
         z-index: 10;  
   }
 
