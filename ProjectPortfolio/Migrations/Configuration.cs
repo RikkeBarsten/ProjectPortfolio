@@ -13,6 +13,7 @@ namespace ProjectPortfolio.Migrations
         {
             AutomaticMigrationsEnabled = true;
             ContextKey = "ProjectPortfolio.DAL.PortfolioContext";
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(ProjectPortfolio.DAL.PortfolioContext context)
