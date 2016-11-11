@@ -261,8 +261,9 @@
 
 <script>
     var multiple = document.getElementsByClassName("skjulMultiple");
-    
-    if ("@Model.Status.ToString()" == "Bevilget"
+
+    if ("@Model.Status.ToString()" == "Bevilget_IS"
+        || "@Model.Status.ToString()" == "Bevilget_S"
         || "@Model.Status.ToString()" == "Afslag"
         || "@Model.Status.ToString()" == "Afbrudt") {
         document.getElementsByClassName("skjulStatus")[0].style.display = "block";
@@ -270,7 +271,7 @@
     }
     if ("@Model.MultiplePartners.ToString()" == "Nej"
         || "@Model.MultiplePartners.ToString()" == null) {
-        
+
         for (var i = 0; i < multiple.length; i++) {
             multiple[i].style.display = "none";
         }
@@ -282,7 +283,7 @@
         console.log(option.value);
 
         if (option.value > 1) {
-            if (option.value == 2) {
+            if (option.value == 2 || option.value == 3) {
                 alert("Husk at give Budgetafdelingen besked, hvis din projektansøgning er godkendt, " +
                 "så du kan få et projektnummer.");
             }
