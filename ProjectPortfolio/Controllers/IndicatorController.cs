@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ProjectPortfolio.DAL;
 using ProjectPortfolio.Models.ViewModels;
+using System.Text;
 
 namespace ProjectPortfolio.Controllers
 {
@@ -44,6 +45,17 @@ namespace ProjectPortfolio.Controllers
             //Add the list to the collection class
             col.ProgramList = dataP;
 
+
+            //StringBuilder sunString = new StringBuilder();
+
+            //foreach(var p in db.AProjects)
+            //{
+            //    sunString.Append(p.ProgramId + "-" + p.PrimaryFocus.Replace("-", "") + "-" + p.SecondaryFocus.Replace("-", "") + ",");
+            //}
+            
+
+            //ViewBag.sunBurstString = sunString.ToString();
+            
 
             return View(col);
         }

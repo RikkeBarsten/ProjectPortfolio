@@ -13,6 +13,7 @@ namespace ProjectPortfolio.Migrations
         {
             AutomaticMigrationsEnabled = true;
             ContextKey = "ProjectPortfolio.DAL.PortfolioContext";
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(ProjectPortfolio.DAL.PortfolioContext context)
@@ -107,13 +108,13 @@ namespace ProjectPortfolio.Migrations
                 new Project { Name="Test - Kompetencefonden pulje 2015",
                     StartDate=DateTime.Parse("01-01-2015"),
                     EndDate=DateTime.Parse("09-01-2019"),
-                    FunderId = 4, Person = "Rikke Barsten", Budget = 30000.00m, ProjectNumber = 3007, Status = Status.Bevilget, ProgramId = "A",
+                    FunderId = 4, Person = "Rikke Barsten", Budget = 30000.00m, ProjectNumber = 3007, Status = Status.Bevilget_IS, ProgramId = "A",
                     Files = new List<File> { }
                 },
                 new Project { Name="Test - Clean Tech",
                     StartDate=DateTime.Parse("01-09-2014"),
                     EndDate=DateTime.Parse("31-08-2017"),
-                    FunderId = 2, Person = "Nina Olsen", Budget = 284515.00m, ProjectNumber = 3008, Status = Status.Bevilget, ProgramId = "B",
+                    FunderId = 2, Person = "Nina Olsen", Budget = 284515.00m, ProjectNumber = 3008, Status = Status.Bevilget_S, ProgramId = "B",
                     Files = new List<File> { }
                 }
             };

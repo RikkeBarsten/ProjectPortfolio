@@ -5,7 +5,6 @@ using System.Net;
 using System.Web.Mvc;
 using ProjectPortfolio.Models;
 using ProjectPortfolio.DAL;
-using Bibliotek.SortSearch;
 using System.Data;
 using System.Data.Entity.Infrastructure;
 using System.Web;
@@ -172,9 +171,17 @@ namespace ProjectPortfolio.Controllers
                         }
                         project.Files = new List<File> { application };
                     }
-                    
-                //project.Id = Guid.NewGuid();  -- not necessary as set in model annotations: [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-                db.AProjects.Add(project);
+
+                    //project.Id = Guid.NewGuid();  -- not necessary as set in model annotations: [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
+                    //Set the section, if RespNo is given at creation
+
+                    if (project.RespNo != null)
+                    {
+                        project.SetSection(project.RespNo);
+                    }
+
+                    db.AProjects.Add(project);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -298,6 +305,12 @@ namespace ProjectPortfolio.Controllers
                             projectToUpdate.Files = new List<Models.File> { response };
                         }
                         
+                    }
+
+                    //Update section
+                    if (projectToUpdate.RespNo != null)
+                    {
+                        projectToUpdate.SetSection(projectToUpdate.RespNo);
                     }
 
 

@@ -163,7 +163,9 @@
                 <span class="control-label col-md-2"><strong>Ansøgning</strong></span>
                 <div class="col-md-10">
                     @Html.ActionLink(@Model.Files.First(f => f.FileType == FileType.application).FileName, "Index", "File",
-                new { id = @Model.Files.First(f => f.FileType == FileType.application).FileId }, null)
+                new { id = @Model.Files.First(f => f.FileType == FileType.application).FileId }, null)  |
+                      @Html.ActionLink("Slet", "Delete", "File",
+                new { id = @Model.Files.First(f => f.FileType == FileType.application).FileId, p_id = Model.ProjectId }, null)
                 </div>
             </div>
         }
@@ -171,7 +173,7 @@
         <div class="form-group">
             @Html.Label("Tilføj/erstat ansøgning", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="file" id="Application" name="uploadApp" />
+                <input type="file" id="Application" name="uploadApp" class="btn btn-default"/>
             </div>
         </div>
 
@@ -182,20 +184,24 @@
 
         @if (Model.Files.Any(f => f.FileType == FileType.response))
         {
-            <div class="form-group skjulStatus" style = "display:none">
+            <div class="form-group">
                 <span class="control-label col-md-2"><strong>Svar fra fond</strong></span>
                 <div class="col-md-10">
                     @Html.ActionLink(@Model.Files.First(f => f.FileType == FileType.response).FileName, "Index", "File",
-                new { id = @Model.Files.First(f => f.FileType == FileType.response).FileId }, null)
+                new { id = @Model.Files.First(f => f.FileType == FileType.response).FileId }, null)  |
+                      @Html.ActionLink("Slet", "Delete", "File",
+                new { id = @Model.Files.First(f => f.FileType == FileType.response).FileId, p_id = Model.ProjectId }, null)
                 </div>
+                
             </div>
         }
 
-        <div class="form-group skjulStatus" style = "display:none">
+        <div class="form-group">
             @Html.Label("Tilføj/erstat svarbrev", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="file" id="Response" name="uploadResponse" />
+                <input type="file" id="Response" name="uploadResponse" class="btn btn-default" />
             </div>
+             
         </div>
 
         @* End attachment *@

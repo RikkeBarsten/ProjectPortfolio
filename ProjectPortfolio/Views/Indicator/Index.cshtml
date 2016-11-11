@@ -7,7 +7,7 @@
 
 <script src="~/Scripts/d3.min.js" )></script>
 <div class="row">
-    <h3>Samlet årligt projektbudget</h3>
+    <h3>Årlige projektbevillinger</h3>
     <div id="budgetBarChart" class="chart" style="padding-top: 50px"></div>
 </div>
 @* End of barchart row *@
@@ -16,10 +16,16 @@
     <div id="themePieChart" class="chart" ></div>
 </div>
 @* End of piechart row *@
+
+@*<div class="row">
+    <h3>Sunburst</h3>
+    <div id="sunBurstChart" class="chart"></div>
+</div>*@
+@* End of sunburst row *@
     <script>
         (function (d3) {
 
-
+            var TEC_colors = ["#28cdaf", "#00415a", "#fa5050", "#550041", "#cda01e", "#5a1400", "#b4a082", "#004b46", "#64becd"];
 
             (function (data) {
 
@@ -36,7 +42,12 @@
                     height = 350 - margin.top - margin.bottom,
                     sortOrder = true;
 
-                var color = d3.scaleOrdinal(d3.schemeCategory10);
+                var color = d3.scaleOrdinal().range(TEC_colors);
+
+                //tooltip instead of labels
+                var bartooltip = d3.select("#budgetBarChart").append("div").attr("class", "tooltips");
+                bartooltip.append("div").attr("class", "barlabel");
+                bartooltip.append("div").attr("class", "barcount");
 
                 //Ranges
                 var x = d3.scaleBand()
@@ -53,7 +64,6 @@
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom);
 
-
                 svg.selectAll("rect")
                 .data(dataArray)
                 .enter()
@@ -65,26 +75,23 @@
                 .attr("fill", function (d, i) { return color(d.Year) })
                 .on("click", function () { sortBars() })
                 .on("mouseover", function (d) {
-                    //Get this bars x and y values
-                    var xPosition = parseFloat(d3.select(this).attr("x")) + x.bandwidth() / 2;
-                    var yPosition = parseFloat(d3.select(this).attr("y")) + 14;
-                    svg.append("text")
-                        .attr("id", "tooltip")
-                        .attr("x", xPosition)
-                        .attr("y", yPosition + 15)
-                        .attr("text-anchor", "middle")
-                        .attr("font-family", "sans-serif")
-                        .attr("font-size", "11px")
-                        .attr("font-weight", "bold")
-                        .attr("fill", "black")
-                        .text("Samlet budget: " + d.Budget.toLocaleString() + " kr.");
+                    bartooltip.select('.barlabel').html("Samlet budget: " + d.Budget.toLocaleString() +  " kr.");
+                   
+                    bartooltip.select(".barcount").html("Antal projekter: " + d.NoProjects);
+
+                    bartooltip.style('display', 'block');
+
+               
                 })
-                .on("mouseout", function () {
-                    //Remove the tooltip
-                    d3.select("#tooltip").remove();
+                .on("mouseout", function (d) {
+                    bartooltip.style('display', 'none');
+                })
+                .on('mousemove', function (d) {
+                    bartooltip.style('top', (d3.event.layerY + 10) + 'px')
+                      .style('left', (d3.event.layerX + 10) + 'px');
                 });
 
-
+                //Setting up the labels (years) for the bars
                 var labels = svg.selectAll("text")
                 .data(dataArray)
                 .enter()
@@ -98,10 +105,6 @@
                 .attr("text-anchor", "middle")
                 .text(function (d) { return d.Year; });
                 
-
-
-
-
 
                 var sortBars = function () {
                     sortOrder = !sortOrder;
@@ -156,15 +159,16 @@
                 var margin = { top: 20, right: 20, bottom: 30, left: 40 },
                     width = 700 - margin.left - margin.right,
                     height = 700 - margin.top - margin.bottom,
-                    radius = Math.min(width, height) / 2,
+                    //radius = (Math.min(width, height) / 2),
+                    radius = 250;
                     donutWidth = 75
 
                 var legendRectSize = 18,
                     legendSpacing = 4;
 
-                var color = d3.scaleOrdinal(d3.schemeCategory10);
+                var color = d3.scaleOrdinal().range(TEC_colors);
 
-                var tooltip = d3.select("#themePieChart").append("div").attr("class", "pietooltip");
+                var tooltip = d3.select("#themePieChart").append("div").attr("class", "tooltips");
                 tooltip.append("div").attr("class", "pielabel");
                 tooltip.append("div").attr("class", "piecount");
                 tooltip.append("div").attr("class", "piepercent");
@@ -263,6 +267,61 @@
 
 
             })(@Html.Raw(Json.Encode(@Model.ProgramList)));
+
+
+
+            @*(function (data) {
+
+                
+
+                var PieData = Object.keys(data).map(function (k) { return data[k] });
+                console.log("Length: " + PieData.length);
+                
+                PieData.forEach(function (d) {
+                    d.NoProjects = +d.NoProjects;
+                    d.enabled = true;
+
+                });
+
+
+                var margin = { top: 20, right: 20, bottom: 30, left: 40 },
+                    width = 700 - margin.left - margin.right,
+                    height = 700 - margin.top - margin.bottom,
+                    radius = Math.min(width, height) / 2,
+                    donutWidth = 75
+
+                var legendRectSize = 18,
+                    legendSpacing = 4;
+
+                var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+                
+
+                var svg = d3.select("#sunBurstChart").append("svg")
+                        .attr("width", width)
+                        .attr("height", height)
+                        .append("g")
+                        .attr("transform", "translate(" + (width / 2) + "," + (height / 2) + ")");
+
+                var arc = d3.arc().innerRadius(radius - donutWidth).outerRadius(radius);
+
+                var pie = d3.pie().value(function (d) { return d.NoProjects }).sort(null);
+
+                var path = svg.selectAll("path")
+                        .data(pie(PieData))
+                        .enter()
+                        .append("path")
+                        .attr("d", arc)
+                        .attr("fill", function (d, i) { return color(d.data.Program); })
+                        .each(function (d) { this._current = d; });
+                    
+               
+
+
+
+
+
+            })(@ViewBag.sunBurstJson));*@
 
 
         })(window.d3)
