@@ -17,7 +17,9 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ProjectId)
 
-        <div class="form-group">
+          <h4 class="divider">Overordnet projektinformation</h4>
+          <hr class="divider" />
+          <div class="form-group">
             @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EnumDropDownListFor(model => model.Status, 
@@ -57,7 +59,9 @@
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
-
+          <br />
+          <h4 class="divider">Økonomi</h4>
+          <hr class="divider" />
         <div class="form-group">
             @Html.LabelFor(model => model.Budget, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -105,6 +109,10 @@
                 @Html.ValidationMessageFor(model => model.FunderId, "", new { @class = "text-danger" })
             </div>
         </div>
+          
+          <br />
+          <h4 class="divider">Strategisk</h4>
+          <hr class="divider" />
 
         <div class="form-group">
             @Html.LabelFor(model => model.ProgramId, "Program", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -130,6 +138,10 @@
               </div>
           </div>
 
+          <br />
+          <h4 class="divider">Ansvar</h4>
+          <hr class="divider" />
+
           <div class="form-group">
               @Html.LabelFor(model => model.Person, htmlAttributes: new { @class = "control-label col-md-2" })
               <div class="col-md-10">
@@ -154,6 +166,10 @@
               </div>
           </div>
 
+
+          <br />
+          <h4 class="divider">Øvrigt</h4>
+          <hr class="divider" />
 
         @* Start attachment - application *@
 

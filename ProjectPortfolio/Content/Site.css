@@ -88,3 +88,11 @@ hr .form-line {
   font: 10px sans-serif;
 
 }
+
+
+.divider {
+    margin: 10px;
+    color: darkgrey;
+    font-weight: lighter;
+}
+
