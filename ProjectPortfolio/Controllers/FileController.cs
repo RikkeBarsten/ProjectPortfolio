@@ -44,7 +44,7 @@ namespace ProjectPortfolio.Controllers
         {
             StringWriter sw = new StringWriter();
 
-            sw.WriteLine("\"Projekt\";\"Projektnummer\";\"Status\";\"Start\";\"Slut\";\"Beskrivelse\";\"Budget\";\"Egenandel\";\"Flere partnere\";\"Eksternt projektnummmer\";\"Ejer/partner\";\"Samlet budget\";\"Bevillingstype\";\"Strategisk program\";\"Primært indsatsområde\";\"Sekundært indsatsområde\";\"Kontaktperson\";\"Ansvarlig\";\"Formålsnummer\";\"Link\";\"Bemærkning\"");
+            sw.WriteLine("\"Projekt\";\"Projektnummer\";\"Status\";\"Start\";\"Slut\";\"Beskrivelse\";\"Budget\";\"Egenandel\";\"Flere partnere\";\"Eksternt projektnummmer\";\"Ejer/partner\";\"Samlet budget\";\"Bevillingstype\";\"Strategisk program\";\"Primært indsatsområde\";\"Sekundært indsatsområde\";\"Kontaktperson\";\"Ansvarlig\";\"Formålsnummer\";\"Område\";\"Link\";\"Bemærkning\"");
 
             //"Name,StartDate,EndDate,Description,Budget,SelfFinancing, MultiplePartners, Owner, AggregatedBudget,FunderId,ProgramId,PrimaryFocus,SecondaryFocus,Person,Responsible,RespNo,ProjectLink, Remark"
 
@@ -59,7 +59,7 @@ namespace ProjectPortfolio.Controllers
 
             foreach (var p in projects)
             {
-                sw.WriteLine(string.Format("\"{0}\";\"{1}\";\"{2}\";\"{3}\";\"{4}\";\"{5}\";\"{6}\";\"{7}\";\"{8}\";\"{9}\";\"{10}\";\"{11}\";\"{12}\";\"{13}\";\"{14}\";\"{15}\";\"{16}\";\"{17}\";\"{18}\";\"{19}\";\"{20}\"",
+                sw.WriteLine(string.Format("\"{0}\";\"{1}\";\"{2}\";\"{3}\";\"{4}\";\"{5}\";\"{6}\";\"{7}\";\"{8}\";\"{9}\";\"{10}\";\"{11}\";\"{12}\";\"{13}\";\"{14}\";\"{15}\";\"{16}\";\"{17}\";\"{18}\";\"{19}\";\"{20}\";\"{21}\"",
                     p.Name,
                     p.ProjectNumber,
                     p.Status,
@@ -79,6 +79,7 @@ namespace ProjectPortfolio.Controllers
                     p.Person,
                     p.Responsible,
                     p.RespNo,
+                    p.Section,
                     p.ProjectLink,
                     p.Remark
                     ));
