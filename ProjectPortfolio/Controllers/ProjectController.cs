@@ -160,7 +160,7 @@ namespace ProjectPortfolio.Controllers
                     {
                         var application = new File
                         {
-                            FileName = System.IO.Path.GetFileName(uploadApp.FileName),
+                            FileName = uploadApp.FileName,
                             FileType = FileType.application,
                             ContentType = uploadApp.ContentType,
                         };
