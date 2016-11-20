@@ -53,7 +53,7 @@ namespace ProjectPortfolio.Models
         [Display(Name = "Primært indsatsområde")]
         public String PrimaryFocus { get; set; }
 
-        [Display(Name = "Underindsatsområde")]
+        [Display(Name = "Underindsats")]
         public string SecondaryFocus { get; set; }
 
         [ForeignKey("Funder")]

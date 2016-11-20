@@ -12,7 +12,7 @@
     @using (Html.BeginForm("Index", "Project", FormMethod.Get))
     {
         <p>
-            Søg efter navn, indhold eller kontaktperson: @Html.TextBox("searchString")
+            Søg efter navn, indhold, kontaktperson eller indsatsområde: @Html.TextBox("searchString")
             <input type = "submit" value = "Søg"/>
         </p>
     }
@@ -37,15 +37,17 @@
             @Html.DisplayNameFor(model => model.Budget)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SelfFinancing)
+            @*@Html.DisplayNameFor(model => model.SelfFinancing)*@
+            Egen- finansiering
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Funder)
-        </th>
-        <th>
-            @Html.ActionLink("Status", "Index", new { sortOrder = ViewBag.StatusSortParm})
-            @*@Html.DisplayNameFor(model => model.Status)*@
-        </th>
+        </th>        
+        <th>@Html.DisplayNameFor(model => model.PrimaryFocus)</th>
+        <th>@Html.DisplayNameFor(model => model.SecondaryFocus)</th>
+        @*<th>
+            @Html.ActionLink("Status", "Index", new { sortOrder = ViewBag.StatusSortParm })
+        </th>*@
         <th></th>
     </tr>
 
@@ -72,8 +74,14 @@
             @Html.DisplayFor(modelItem => item.Funder.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Status)
+            @Html.DisplayFor(modelItem => item.PrimaryFocus)
         </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SecondaryFocus)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>*@
         <td>
             @Html.ActionLink("Rediger", "Edit", new { id=item.ProjectId }) |
             @Html.ActionLink("Detaljer", "Details", new { id=item.ProjectId }) |

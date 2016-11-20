@@ -23,12 +23,12 @@ namespace ProjectPortfolio.Controllers
                 {"Primært indsatsområde",
                     new List<string> { "Fag-faglighed", "Mobilitet", "Ind- og udskoling",
                                         "Innovation", "Lokal PDS-indsats", "Pædagogisk IT",
-                                        "Skole-virksomhedssamarbejde", "Skriftlighed", "Talent" }
+                                        "Skole og virksomhed", "Skriftlighed", "Talent" }
                 },
                 {
                     "Underindsatsområde",
                     new List<string> {"Ind- og udskoling", "Innovation", "Lokal PDS-indsats",
-                                        "Pædagogisk IT", "Skole-virksomhedssamarbejde", "Skriftlighed",
+                                        "Pædagogisk IT", "Skole og virksomhed", "Skriftlighed",
                                         "Talent", "Internationalisering", "Praktikpladser" }
                 }
 
@@ -61,6 +61,8 @@ namespace ProjectPortfolio.Controllers
                                             || p.Description.Contains(searchString)
                                             || p.Remark.Contains(searchString)
                                             || p.Person.Contains(searchString)
+                                            || p.PrimaryFocus.Contains(searchString)
+                                            || p.SecondaryFocus.Contains(searchString)
                                              );
             }
 
