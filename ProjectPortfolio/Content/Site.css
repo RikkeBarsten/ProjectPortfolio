@@ -27,6 +27,21 @@ textarea {
     max-width: 280px;
 }
 
+.table td.text {
+    max-width: 220px;
+}
+.table td.text span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: 100%;
+}
+
+/*.table td.links{
+    min-width: 100px;
+}*/
+
 hr .form-line {
     margin: 10px;
 }

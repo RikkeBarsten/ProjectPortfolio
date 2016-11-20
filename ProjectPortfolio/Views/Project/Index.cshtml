@@ -22,7 +22,7 @@
    
 
 
-<table class="table table-hover table-condensed">
+<table class="table table-hover table-condensed table-responsive">
     <tr>
         <th>
             @Html.ActionLink("Navn", "Index", new { sortOrder = ViewBag.NameSortParm })
@@ -53,8 +53,11 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td style="word-wrap: break-word; max-width: 260px;">
-            @Html.DisplayFor(modelItem => item.Name)
+        <td class="text" >
+            <span>
+                @* @Html.DisplayFor(modelItem => item.Name)*@
+                @Html.ActionLink(item.Name, "Details", new { id = item.ProjectId })
+            </span>
         </td>
         <td>
             @*@Html.DisplayFor(modelItem => item.StartDate)*@
@@ -82,10 +85,12 @@
         @*<td>
             @Html.DisplayFor(modelItem => item.Status)
         </td>*@
-        <td>
-            @Html.ActionLink("Rediger", "Edit", new { id=item.ProjectId }) |
-            @Html.ActionLink("Detaljer", "Details", new { id=item.ProjectId }) |
-            @Html.ActionLink("Slet", "Delete", new { id=item.ProjectId })
+        <td >
+            
+                @Html.ActionLink("Rediger", "Edit", new { id = item.ProjectId }) |
+                @*@Html.ActionLink("Detaljer", "Details", new { id=item.ProjectId }) |*@
+                @Html.ActionLink("Slet", "Delete", new { id = item.ProjectId })
+           
         </td>
     </tr>
 }
