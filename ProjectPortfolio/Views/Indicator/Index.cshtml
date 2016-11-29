@@ -17,12 +17,14 @@
 </div>
 @* End of piechart row *@
 
-@*<div class="row">
+<div class="row" style="width:700px; height:700px">
     <h3>Sunburst</h3>
     <div id="sunBurstChart" class="chart"></div>
-</div>*@
+</div>
 @* End of sunburst row *@
     <script>
+
+
         (function (d3) {
 
             var TEC_colors = ["#28cdaf", "#00415a", "#fa5050", "#550041", "#cda01e", "#5a1400", "#b4a082", "#004b46", "#64becd"];
@@ -76,12 +78,12 @@
                 .on("click", function () { sortBars() })
                 .on("mouseover", function (d) {
                     bartooltip.select('.barlabel').html("Samlet budget: " + d.Budget.toLocaleString() +  " kr.");
-                   
+
                     bartooltip.select(".barcount").html("Antal projekter: " + d.NoProjects);
 
                     bartooltip.style('display', 'block');
 
-               
+
                 })
                 .on("mouseout", function (d) {
                     bartooltip.style('display', 'none');
@@ -104,7 +106,7 @@
                 })
                 .attr("text-anchor", "middle")
                 .text(function (d) { return d.Year; });
-                
+
 
                 var sortBars = function () {
                     sortOrder = !sortOrder;
@@ -144,11 +146,11 @@
 
             (function (data) {
 
-                
+
 
                 var PieData = Object.keys(data).map(function (k) { return data[k] });
                 console.log("Length: " + PieData.length);
-                
+
                 PieData.forEach(function (d) {
                     d.NoProjects = +d.NoProjects;
                     d.enabled = true;
@@ -190,7 +192,7 @@
                         .attr("d", arc)
                         .attr("fill", function (d, i) { return color(d.data.Program); })
                         .each(function (d) { this._current = d; });
-                    
+
                 path.on("mouseover", function (d) {
                     var total = d3.sum(PieData.map(function (d) {
                         return d.NoProjects;
@@ -236,7 +238,7 @@
                   //    var enabled = true;
                   //    var totalEnabled = d3.sum(dataset.map(function (d) {
                   //        return (d.enabled) ? 1 : 0;
-                      
+
                   //});
 
                 legend.append('text')
@@ -268,60 +270,104 @@
 
             })(@Html.Raw(Json.Encode(@Model.ProgramList)));
 
-
-
-            @*(function (data) {
+            (function () {
 
                 
 
-                var PieData = Object.keys(data).map(function (k) { return data[k] });
-                console.log("Length: " + PieData.length);
+
+                var csvData = "@Html.Raw(HttpUtility.JavaScriptStringEncode(@ViewBag.SequencesCsv))";
+
+                console.log("Raw:")
+                console.log(csvData);
+
+                console.log("Parsing the data...")
+                var table = d3.csvParse(csvData);
+                console.log("Parsed(table):");
+                console.log(JSON.stringify(table));
+
+                //console.log("Using buildhierarchy():")
+
+                //var root = buildHierarchy(csvData);
+
+                //console.log(root);
+
+             
+                console.log("Setting dimensions...");
+                // set the dimensions and margins of the diagram
                 
-                PieData.forEach(function (d) {
-                    d.NoProjects = +d.NoProjects;
-                    d.enabled = true;
+                var width = 660,
+                    height = 500,
+                    radius = (Math.min(width, height) / 2) - 10;
 
-                });
+                var color = d3.scaleOrdinal().range(TEC_colors);
+
+                console.log("Nesting table...")
+                var nest = d3.nest()
+                    .key(function (d) { return d.parent; })
+                    .key(function(d){return d.child})
+                    .entries(table);
 
 
-                var margin = { top: 20, right: 20, bottom: 30, left: 40 },
-                    width = 700 - margin.left - margin.right,
-                    height = 700 - margin.top - margin.bottom,
-                    radius = Math.min(width, height) / 2,
-                    donutWidth = 75
+                console.log("Nest(nested table):");
+                console.log(JSON.stringify(nest));
 
-                var legendRectSize = 18,
-                    legendSpacing = 4;
 
-                var color = d3.scaleOrdinal(d3.schemeCategory10);
+                var x = d3.scaleLinear()
+                    .range([0, 2 * Math.PI]);
 
+                var y = d3.scaleSqrt()
+                    .range([0, radius]);
                 
+                //Creating hierarchy..
+                var root = d3.hierarchy({ values: nest }, function (d) { return d.values });
+
+                console.log("Hierarchy(root):");
+                console.log(root);
+
+                var partition = d3.partition();
+
+                var arc = d3.arc()
+                    .startAngle(function (d) { return Math.max(0, Math.min(2 * Math.PI, x(d.x0))); })
+                    .endAngle(function (d) { return Math.max(0, Math.min(2 * Math.PI, x(d.x1))); })
+                    .innerRadius(function (d) { return Math.max(0, y(d.y0)); })
+                    .outerRadius(function (d) { return Math.max(0, y(d.y1)); });
+
 
                 var svg = d3.select("#sunBurstChart").append("svg")
-                        .attr("width", width)
-                        .attr("height", height)
-                        .append("g")
-                        .attr("transform", "translate(" + (width / 2) + "," + (height / 2) + ")");
+                    .attr("width", width)
+                    .attr("height", height)
+                  .append("g")
+                    .attr("transform", "translate(" + width / 2 + "," + (height / 2) + ")");
 
-                var arc = d3.arc().innerRadius(radius - donutWidth).outerRadius(radius);
+                root.sum(function (d) { return d.count; });
+                svg.selectAll("path")
+                    .data(partition(root).descendants())
+                  .enter().append("path")
+                    .attr("d", arc)
+                    .style("fill", function (d) { return color((d.children ? d : d.parent).data.key); })
+                    .on("click", click)
+                  .append("title")
+                    .text(function (d) { return d.data.key + "\nAntal projekter: " + d.value; });
 
-                var pie = d3.pie().value(function (d) { return d.NoProjects }).sort(null);
+                function click(d) {
+                    svg.transition()
+                        .duration(750)
+                        .tween("scale", function () {
+                            var xd = d3.interpolate(x.domain(), [d.x0, d.x1]),
+                                yd = d3.interpolate(y.domain(), [d.y0, 1]),
+                                yr = d3.interpolate(y.range(), [d.y0 ? 20 : 0, radius]);
+                            return function (t) { x.domain(xd(t)); y.domain(yd(t)).range(yr(t)); };
+                        })
+                      .selectAll("path")
+                        .attrTween("d", function (d) { return function () { return arc(d); }; });
+                }
 
-                var path = svg.selectAll("path")
-                        .data(pie(PieData))
-                        .enter()
-                        .append("path")
-                        .attr("d", arc)
-                        .attr("fill", function (d, i) { return color(d.data.Program); })
-                        .each(function (d) { this._current = d; });
-                    
-               
+                d3.select(self.frameElement).style("height", height + "px");
 
 
+                })();
 
 
-
-            })(@ViewBag.sunBurstJson));*@
 
 
         })(window.d3)
@@ -331,69 +377,4 @@
     </script>
     
 
-@*<div class="row">
-        <div class="col-md-6">
-            <h2>Igangværende projekter pr. år - budget</h2>
 
-            <p>
-                <table class="table">
-                    <tr>
-                        <th>
-                            År
-                        </th>
-                        <th style="text-align:center">
-                            Projekter
-                        </th>
-                        <th style="text-align:right">
-                            Samlet budget
-                        </th>
-                    </tr>
-
-                    @foreach (var group in Model.BudgetList)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => group.Year)
-                            </td>
-                            <td style="text-align:center">
-                                @group.NoProjects
-                            </td>
-                            <td style="text-align:right">
-                                @Html.DisplayFor(modelItem => group.Budget)
-                            </td>
-                        </tr>
-                    }
-                </table>
-            </p>
-
-        </div>
-
-        <div class="col-md-6">
-            <h2>Projekter fordelt på strategisk program</h2>
-            <p>
-                <table class="table">
-                    <tr>
-                        <th>
-                            Program
-                        </th>
-                        <th style="text-align:right">
-                            Projekter
-                        </th>
-                    </tr>
-
-                    @foreach (var group in Model.ProgramList)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => group.Program)
-                            </td>
-                            <td style="text-align:right">
-                                @Html.DisplayFor(modelItem => group.NoProjects)
-                            </td>
-                        </tr>
-                    }
-                </table>
-            </p>
-
-        </div>
-    </div>*@
