@@ -11,11 +11,7 @@
     <div id="budgetBarChart" class="chart" style="padding-top: 50px"></div>
 </div>
 @* End of barchart row *@
-<div class="row">
-    <h3>Indsatsområder</h3>
-    <div id="themePieChart" class="chart" ></div>
-</div>
-@* End of piechart row *@
+
 
 <div class="row">
     <h3>Indsatsområder</h3>
@@ -146,131 +142,7 @@
             })(@Html.Raw(Json.Encode(@Model.BudgetList)));
 
 
-            (function (data) {
-
-
-
-                var PieData = Object.keys(data).map(function (k) { return data[k] });
-                console.log("Length: " + PieData.length);
-
-                PieData.forEach(function (d) {
-                    d.NoProjects = +d.NoProjects;
-                    d.enabled = true;
-
-                });
-
-
-                var margin = { top: 20, right: 20, bottom: 30, left: 40 },
-                    width = 700 - margin.left - margin.right,
-                    height = 700 - margin.top - margin.bottom,
-                    //radius = (Math.min(width, height) / 2),
-                    radius = 250;
-                    donutWidth = 75
-
-                var legendRectSize = 18,
-                    legendSpacing = 4;
-
-                var color = d3.scaleOrdinal().range(TEC_colors);
-
-                var tooltip = d3.select("#themePieChart").append("div").attr("class", "tooltips");
-                tooltip.append("div").attr("class", "pielabel");
-                tooltip.append("div").attr("class", "piecount");
-                tooltip.append("div").attr("class", "piepercent");
-
-                var svg = d3.select("#themePieChart").append("svg")
-                        .attr("width", width)
-                        .attr("height", height)
-                        .append("g")
-                        .attr("transform", "translate(" + (width / 2) + "," + (height / 2) + ")");
-
-                var arc = d3.arc().innerRadius(radius - donutWidth).outerRadius(radius);
-
-                var pie = d3.pie().value(function (d) { return d.NoProjects }).sort(null);
-
-                var path = svg.selectAll("path")
-                        .data(pie(PieData))
-                        .enter()
-                        .append("path")
-                        .attr("d", arc)
-                        .attr("fill", function (d, i) { return color(d.data.Program); })
-                        .each(function (d) { this._current = d; });
-
-                path.on("mouseover", function (d) {
-                    var total = d3.sum(PieData.map(function (d) {
-                        return d.NoProjects;
-                    }));
-
-                    var percent = Math.round(1000 * d.data.NoProjects / total) / 10;
-                    tooltip.select(".pielabel").html("Program " + d.data.Program);
-                    tooltip.select(".piecount").html("Antal: " + d.data.NoProjects);
-                    tooltip.select(".piepercent").html(percent + "%");
-                    tooltip.style("display", "block");
-
-                });
-
-                path.on("mouseout", function (d) {
-                    tooltip.style('display', 'none');
-                });
-
-                path.on('mousemove', function (d) {
-                    tooltip.style('top', (d3.event.layerY + 10) + 'px')
-                      .style('left', (d3.event.layerX + 10) + 'px');
-                });
-
-                var legend = svg.selectAll('.legend')
-                .data(color.domain())
-                .enter()
-                .append('g')
-                .attr('class', 'legend')
-                .attr('transform', function (d, i) {
-                    var height = legendRectSize + legendSpacing;
-                    var offset = height * color.domain().length / 2;
-                    var horz = -7 * legendRectSize;
-                    var vert = i * height - offset;
-                    return 'translate(' + horz + ',' + vert + ')';
-                });
-
-                legend.append('rect')
-                  .attr('width', legendRectSize)
-                  .attr('height', legendRectSize)
-                  .style('fill', color)
-                  .style('stroke', color);
-                  //.on("click", function (label) {
-                  //    var rect = d3.select(this);
-                  //    var enabled = true;
-                  //    var totalEnabled = d3.sum(dataset.map(function (d) {
-                  //        return (d.enabled) ? 1 : 0;
-
-                  //});
-
-                legend.append('text')
-                 .attr('x', legendRectSize + legendSpacing)
-                 .attr('y', legendRectSize - legendSpacing)
-                 .text(function (d) {
-                     switch (d) {
-                         case "A":
-                             return "A Vi styrker TECs ledere og medarbejdere"
-                             break;
-                         case "B":
-                             return "B Vi styrker TECs kerneydelse"
-                             break;
-                         case "C":
-                             return "C Vi styrker TECs infrastruktur"
-                             break;
-                         case "D":
-                             return "D Vi styrker TECs forretningsmæssige position"
-                             break;
-                         default:
-                             return"Kunne ikke finde tekst"
-
-                     }
-                 });
-
-
-
-
-
-            })(@Html.Raw(Json.Encode(@Model.ProgramList)));
+   
 
             (function () {
 
