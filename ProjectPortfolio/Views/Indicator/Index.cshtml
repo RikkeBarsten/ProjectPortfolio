@@ -17,8 +17,10 @@
 </div>
 @* End of piechart row *@
 
-<div class="row" style="width:700px; height:700px">
-    <h3>Sunburst</h3>
+<div class="row">
+    <h3>Indsatsområder</h3>
+    <p>I diagrammet ses projekter fordelt på indsatsområder. Ved at klikke på indsatsområdet kan du zoome ind. 
+        Du zoomer ud igen ved at klikke på cirklen i midten. Projekter med startdato i de tre seneste år er medtaget i diagrammet.</p>
     <div id="sunBurstChart" class="chart"></div>
 </div>
 @* End of sunburst row *@
@@ -304,7 +306,12 @@
                 console.log("Nesting table...")
                 var nest = d3.nest()
                     .key(function (d) { return d.parent; })
-                    .key(function(d){return d.child})
+                    .key(function (d) { return d.child })
+                    .key(function (d) { return d.project })
+                    //.rollup(function (leaves) { return d3.sum(leaves, function (d) { return d.budget; }) })
+                    //
+                    .rollup(function (d) { return d3.sum(d, function (d) { return d.budget; }); })
+
                     .entries(table);
 
 
@@ -324,22 +331,30 @@
                 console.log("Hierarchy(root):");
                 console.log(root);
 
-                var partition = d3.partition();
+                
+               
+                
 
+                // Creating the arcs
                 var arc = d3.arc()
                     .startAngle(function (d) { return Math.max(0, Math.min(2 * Math.PI, x(d.x0))); })
                     .endAngle(function (d) { return Math.max(0, Math.min(2 * Math.PI, x(d.x1))); })
                     .innerRadius(function (d) { return Math.max(0, y(d.y0)); })
                     .outerRadius(function (d) { return Math.max(0, y(d.y1)); });
 
-
+                // Creating svg and appending g
                 var svg = d3.select("#sunBurstChart").append("svg")
                     .attr("width", width)
                     .attr("height", height)
                   .append("g")
                     .attr("transform", "translate(" + width / 2 + "," + (height / 2) + ")");
 
-                root.sum(function (d) { return d.count; });
+                // Creating the sum-value
+                root.sum(function (d) { return d.value;});
+                
+                var partition = d3.partition();
+
+                // Creating paths for all descendants
                 svg.selectAll("path")
                     .data(partition(root).descendants())
                   .enter().append("path")
@@ -347,7 +362,7 @@
                     .style("fill", function (d) { return color((d.children ? d : d.parent).data.key); })
                     .on("click", click)
                   .append("title")
-                    .text(function (d) { return d.data.key + "\nAntal projekter: " + d.value; });
+                    .text(function (d) { return (d.data.key == null ? "" : d.data.key) + "\nSamlet budget: " + d.value.toLocaleString(); });
 
                 function click(d) {
                     svg.transition()
