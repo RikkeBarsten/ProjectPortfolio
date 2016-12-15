@@ -168,6 +168,7 @@
     <Compile Include="DAL\PortfolioInitializer.cs" />
     <Compile Include="Models\ViewModels\DashboardClassesCollection.cs" />
     <Compile Include="Models\ViewModels\FunderProjects.cs" />
+    <Compile Include="Models\ViewModels\FundersBudget.cs" />
     <Compile Include="Models\ViewModels\ProgramProjects.cs" />
     <Compile Include="Models\ViewModels\ProjectsBudget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -20,7 +20,7 @@ namespace ProjectPortfolio.Controllers
             DashboardClassesCollection col = new DashboardClassesCollection();
 
             // Setting up the list of ProjectBudget-items
-            var groupB = db.AProjects.GroupBy(p => p.StartDate.Year);
+            var groupB = db.AProjects.Where(p => p.StartDate.Year > DateTime.Now.Year -5).GroupBy(p => p.StartDate.Year);
             List<ProjectsBudget> dataB = new List<ProjectsBudget>();
 
             foreach (var group in groupB)
@@ -46,9 +46,12 @@ namespace ProjectPortfolio.Controllers
             //Add the list to the collection class
             col.ProgramList = dataP;
 
+            //Set up list of yearly budget by funder
+
            
 
             ViewBag.SequencesCsv = sequenceStringCsv();
+            ViewBag.FundersBudgetList = getFundersBudgetList();
             
 
 
@@ -115,11 +118,45 @@ namespace ProjectPortfolio.Controllers
         }
 
         
+        private string getFundersBudgetList()
+        {
+            // Only include projects from last 5 years
+            var projectList = db.AProjects.Where(p => p.StartDate.Year > DateTime.Now.Year - 5).Where(p => p.FunderId != null).ToList();
+
+            var fundersBudgetList = new List<FundersBudget>();
+            StringBuilder fundersBudgetCsv = new StringBuilder();
+            fundersBudgetCsv.AppendLine("year,funder,budget");
+
+            var groupY = db.AProjects.Where(p => p.StartDate.Year > DateTime.Now.Year - 5).GroupBy(p => p.StartDate.Year);
+
+            foreach (var year in groupY)
+            {
+                var fundersYearGroup = year.Where(p => p.FunderId.HasValue).GroupBy(p => p.Funder.Name);
+
+                foreach (var funder in fundersYearGroup)
+                {
+                   
+                        decimal? yearFunderBudget = funder.Sum(b => b.Budget);
+
+                        if (yearFunderBudget != null)
+                        {
+                            fundersBudgetList.Add(new FundersBudget { Year = year.Key, Funder = funder.Key, Budget = yearFunderBudget });
+                            fundersBudgetCsv.AppendLine(year.Key.ToString() + "," + funder.Key + "," + ((int)yearFunderBudget.Value).ToString());
+                        }
+                    }
+                    
+                }
+            //return fundersBudgetList;
+            return fundersBudgetCsv.ToString();
+
+        }
 
 
 
-        
-       
-       
+
+
+
+
+
     }
 }

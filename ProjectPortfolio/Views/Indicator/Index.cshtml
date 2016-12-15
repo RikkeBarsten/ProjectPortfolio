@@ -12,6 +12,11 @@
 </div>
 @* End of barchart row *@
 
+@*<div class="row">
+    <h3>Bevillingstyper</h3>
+    <div id="funderBarChart" class="chart" ></div>
+</div>*@
+@* End of barchart row *@
 
 <div class="row">
     <h3>Indsatsområder</h3>
@@ -141,34 +146,21 @@
 
             })(@Html.Raw(Json.Encode(@Model.BudgetList)));
 
-
-   
-
             (function () {
-
-                
-
-
                 var csvData = "@Html.Raw(HttpUtility.JavaScriptStringEncode(@ViewBag.SequencesCsv))";
 
                 console.log("Raw:")
                 console.log(csvData);
 
-                console.log("Parsing the data...")
+                console.log("CSV-parsing the data...")
                 var table = d3.csvParse(csvData);
                 console.log("Parsed(table):");
                 console.log(JSON.stringify(table));
 
-                //console.log("Using buildhierarchy():")
 
-                //var root = buildHierarchy(csvData);
-
-                //console.log(root);
-
-             
-                console.log("Setting dimensions...");
+                //console.log("Setting dimensions...");
                 // set the dimensions and margins of the diagram
-                
+
                 var width = 660,
                     height = 500,
                     radius = (Math.min(width, height) / 2) - 10;
@@ -180,8 +172,6 @@
                     .key(function (d) { return d.parent; })
                     .key(function (d) { return d.child })
                     .key(function (d) { return d.project })
-                    //.rollup(function (leaves) { return d3.sum(leaves, function (d) { return d.budget; }) })
-                    //
                     .rollup(function (d) { return d3.sum(d, function (d) { return d.budget; }); })
 
                     .entries(table);
@@ -196,16 +186,16 @@
 
                 var y = d3.scaleSqrt()
                     .range([0, radius]);
-                
+
                 //Creating hierarchy..
                 var root = d3.hierarchy({ values: nest }, function (d) { return d.values });
 
                 console.log("Hierarchy(root):");
                 console.log(root);
 
-                
-               
-                
+
+
+
 
                 // Creating the arcs
                 var arc = d3.arc()
@@ -223,7 +213,7 @@
 
                 // Creating the sum-value
                 root.sum(function (d) { return d.value;});
-                
+
                 var partition = d3.partition();
 
                 // Creating paths for all descendants
@@ -254,7 +244,97 @@
 
                 })();
 
+            @*(function () {
 
+                var fundersBudgetCsv = "@Html.Raw(HttpUtility.JavaScriptStringEncode(@ViewBag.FundersBudgetList))";
+                console.log("Fundersbudgetlist raw:");
+                console.log(fundersBudgetCsv);
+
+                var table = d3.csvParse(fundersBudgetCsv);
+                console.log("Parsed:");
+                console.log(JSON.stringify(table));
+
+                var nested = d3.nest()
+                       .key(function (d) { return d.year; })
+                       .key(function (d) { return d.funder })
+                       .rollup(function (d) { return d3.sum(d, function (d) { return d.budget; }); })
+                       .entries(table);
+
+                console.log("Nested:");
+                console.log(JSON.stringify(nested));
+
+                //var funderNames = d3.set(table.map(function (d) { return d["funder"]; }).values());
+                var funderNames = d3.set(table.map(function (set) { return set["funder"] })).values();
+                var years = nested.map(function (set) { return set["key"] });
+
+                console.log("funderNames: ");
+                console.log(funderNames);
+                console.log("Years: " + years);
+
+
+
+                var margin = { top: 20, right: 20, bottom: 30, left: 40 },
+                      width = 700 - margin.left - margin.right,
+                      height = 350 - margin.top - margin.bottom,
+                      sortOrder = true;
+
+                var color = d3.scaleOrdinal().range(TEC_colors);
+
+                //tooltip instead of labels
+                var bartooltip = d3.select("#funderBarChart").append("div").attr("class", "tooltips");
+                bartooltip.append("div").attr("class", "barlabel");
+                bartooltip.append("div").attr("class", "barcount");
+
+                //X - scale years
+                var x0 = d3.scaleBand()
+                .range([0, width])
+                .padding(0.2)
+                .domain(years);
+
+                //X - scale funders
+                var x1 = d3.scaleBand()
+                .range([0, x0.bandwidth()])
+                .domain(funderNames);
+
+
+                var y = d3.scaleLinear()
+                .range([0, height])
+                .domain([0, d3.max(table.map(function (set) { return +set["budget"] }))]);
+
+
+                console.log("Max: " + d3.max(table.map(function(set) {return +set["budget"]})));
+
+
+                var svg = d3.select("#budgetBarChart").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom);
+
+                svg.append("g")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+                var year = svg.selectAll(".year")
+                    .data(nested)
+                    .enter().append("g")
+                    .attr("class", "g")
+                    .attr("transform", function (d) { return "translate(" + x0(d.key) + ",0)"; });
+
+                year.selectAll("rect")
+                    .data(function (d) { return d.values; })
+                    .enter().append("rect")
+                     .attr("width", x1.bandwidth())
+                     .attr("x", function (d) { return x1(d.key); })
+                     .attr("y", function (d) { return y(d.value); })
+                     .attr("height", function (d) { return height - y(d.value); })
+                     .style("fill", function (d) { return color(d.key); });
+
+
+
+
+
+
+            })()*@
 
 
         })(window.d3)

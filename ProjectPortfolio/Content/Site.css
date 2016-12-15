@@ -133,3 +133,8 @@ hr .form-line {
   stroke-opacity: 0.4;
   stroke-width: 1.5px;
 }
+
+#funderBarChart {
+    width: 900px;
+    height: 500px;
+}
